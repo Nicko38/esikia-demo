@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="fr" data-booking-mode="auto" data-persons="1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fiche retraitant — Esikia</title>
+  <style>
+    :root{
+      --bg:#f1f8f4; --panel:#ffffff; --line:#dfeee7; --ink:#1c3a31; --muted:#6a7c74;
+      --brand:#1aa67b; --brand-dark:#0b7c66; --danger:#c9342c; --ok:#228b22;
+      --radius:14px; --shadow:0 1px 1px rgba(0,0,0,.02),0 8px 24px rgba(0,0,0,.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.46 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue','Noto Sans',sans-serif}
+    a{color:var(--brand-dark);text-decoration:underline;text-underline-offset:2px}
+    .container{max-width:1140px;margin:22px auto;padding:0 16px}
+    .head{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 18px;display:flex;align-items:center;gap:16px}
+    .head-left{flex:1;min-width:0}
+    .head-title{display:grid;grid-template-columns:1fr;gap:10px;align-items:center}
+    .logo-badge{display:none !important}
+    h1{font-size:18px;margin:0;color:var(--brand-dark);line-height:1.2}
+    .kicker{font-size:13px;color:var(--muted);margin-top:2px;line-height:1.2}
+    .head-info{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;font-size:13px;color:var(--muted);line-height:1.2}
+    .head-info > div{position:relative;padding-right:0}
+    .head-info > div + div::before{content:"•";margin:0 8px 0 0;color:#90a89f}
+
+    .head-sep{display:none}
+    .head-inline-meta{display:flex;align-items:baseline;gap:10px;flex-wrap:nowrap;white-space:nowrap}
+    .head-inline-meta .meta-dot{opacity:.55;margin:0 2px}
+    /* Semi-auto: header meta on separate lines (no bullets) */
+    html[data-booking-mode="semi"] .head-info{display:block;gap:0;flex-wrap:nowrap;line-height:1.25}
+    html[data-booking-mode="semi"] .head-info > div{margin-top:4px}
+    html[data-booking-mode="semi"] .head-info > div + div::before{content:none !important;margin:0 !important}
+
+    html[data-booking-mode="semi"] .head-sep{display:block;border-top:1px dashed var(--line);margin:6px 0 2px;height:0}
+    html[data-booking-mode="semi"] .kicker.kicker-sub{margin-top:2px}
+
+    .actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+    /* Lang switch alignment (screen only) */
+    .actions .lang-switch{margin-left:auto;display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .actions .lang-switch .sep{opacity:.55;margin:0 2px}
+    html[data-booking-mode="semi"] .actions{gap:8px;row-gap:8px}
+
+    .btn{background:#fff;border:1.5px solid var(--brand-dark);border-radius:999px;padding:7px 14px;font-weight:600;cursor:pointer;white-space:nowrap;color:var(--brand-dark)}
+    .btn:hover{background:#f2f9f6}
+        .btn-secondary{border-color:var(--line);color:var(--muted)}
+    .btn-secondary:hover{background:#fafdfb}
+.btn-danger{border-color:#ffd6d6;color:#c9342c;order:99}
+    .btn-print{background:transparent;border-color:#dfeee7;color:var(--brand-dark)}
+    /* LAYOUT */
+    .grid{display:grid;grid-template-columns:420px minmax(0,1fr);gap:16px;margin-top:16px}
+    /* Mobile-first improvements */
+    @media (max-width:640px){
+      /* Mobile hardening: prevent any horizontal overflow / clipping */
+      html, body{max-width:100%; overflow-x:hidden;}
+      .container{width:100% !important; max-width:100% !important; margin:14px auto !important; padding:0 12px !important; box-sizing:border-box;}
+      .head, .card, .section, .grid, .actions, .profile{width:100%; box-sizing:border-box; min-width:0;}
+      .head-left{min-width:0;}
+      .head-left, .head-left *{max-width:100%; overflow-wrap:anywhere; word-break:break-word;}
+      .actions, .actions *{min-width:0; max-width:100%;}
+      .lang-mini.lang-switch{max-width:100%; margin-left:0; justify-content:flex-end;}
+      .row, .row *{min-width:0; max-width:100%;}
+
+      .container{margin:14px auto;padding:0 12px}
+      .head{padding:12px 12px;flex-direction:column;align-items:stretch;gap:10px}
+      .head-title{grid-template-columns:1fr;gap:10px}
+      .logo-badge{display:none !important}
+      h1{font-size:16px}
+      .kicker{font-size:12.5px}
+      .head-info{gap:10px;font-size:12.5px}
+      .head-info > div + div::before{margin:0 6px 0 0}
+      .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+      .btn{padding:9px 12px;font-size:13px;width:100%;text-align:center;justify-content:center}
+      /* Mobile: autoriser le retour à la ligne dans les CTA pour éviter tout débordement */
+      .btn{white-space:normal;line-height:1.15;}
+      .actions{min-width:0;max-width:100%;}
+      .head-inline-meta{flex-wrap:wrap;row-gap:6px;}
+      .jrow div{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word;}
+
+      .btn-danger{order:0}
+      .grid{grid-template-columns:1fr}
+      .card{padding:14px}
+      .section{padding:12px}
+      .profile{align-items:flex-start}
+      .avatar{width:68px;height:68px}
+      .row{grid-template-columns:1fr;gap:2px;padding:8px 0}
+      .row dt{font-size:12.5px}
+      .row dd{font-size:14px}
+      /* Journal (mobile) : conserver une lecture compacte proche du desktop */
+      .jrow{flex-direction:row;align-items:flex-start;gap:10px;padding:6px 0}
+      .jrow > span{flex:0 0 118px;color:var(--muted);font-size:12.5px;line-height:1.2;white-space:nowrap}
+      .jrow div{font-size:13.5px;line-height:1.35}
+      /* Chips (mobile) : éviter toute coupe à droite */
+      /* Sécurité anti-overflow : tout doit pouvoir rétrécir et passer à la ligne */
+      .head, .card, .section, .grid, .actions, .profile{max-width:100%; min-width:0;}
+      .head-left, .head-title, .head-info, .row, .row dt, .row dd{min-width:0;}
+
+      .chips{display:flex;flex-wrap:wrap;min-width:0;max-width:100%;}
+      .chip{flex:0 1 auto;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+      .chip span{white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+
+    }
+    /* Tablet & small desktop */
+    @media (max-width:1024px){
+      .grid{grid-template-columns:1fr}
+    }
+    @media (min-width:1025px) and (max-width:1279px){
+      .grid{grid-template-columns:380px minmax(0,1fr)}
+    }
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .section{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px}
+    .section + .section{margin-top:10px}
+    h3{margin:0 0 8px 0;font-size:16px;color:var(--brand-dark)}
+    .profile{display:flex;gap:12px;align-items:center}
+    .avatar{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #e8f2ed;display:block}
+    dl{margin:0}
+    .row{display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:flex-start;padding:4px 0;line-height:1.5}
+    .row dt{color:var(--muted)}
+    .row dd{margin:0}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{display:inline-flex;align-items:center;gap:6px;background:#f7faf8;border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:13px}
+    .chip.warn{background:#fff6f6;border-color:#ffdcdc;color:#7b1c1c}
+    .status-badge{display:inline-block;background:#e9f6ee;color:#228b22;border:1px solid #d1ebd8;font-weight:700;padding:6px 12px;border-radius:999px}
+    .below-badge{display:block;margin-top:6px;color:#6a7c74}
+    .danger{color:#c9342c}
+
+    .soft-warn{font-weight:700;color:inherit}
+    .soft-warn-icon{color:#8a5a00}
+    .money{font-variant-numeric:tabular-nums}
+    .journal{border-top:1px dashed var(--line)}
+    .jrow{display:flex;gap:12px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line)}
+    .jrow:last-child{border-bottom:none}
+    .jrow > span{flex:0 0 150px;color:var(--muted)}
+    .jrow div{flex:1}
+
+/* DEMO FLOAT (hors des blocs) */
+.demo-float{
+  position:fixed;
+  top:124px;
+  left:max(12px, calc((100vw - 1140px)/2 - 270px));
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.demo-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 12px;
+  box-shadow:var(--shadow);
+  white-space:nowrap;
+  font-size:13px;
+  color:var(--brand-dark);
+  font-weight:700;
+}
+.demo-pill input{
+  margin:0;
+  width:14px;height:14px;
+  accent-color:var(--brand-dark);
+  cursor:pointer;
+}
+.demo-pill label{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+
+/* Toggle d'état (auto / semi) */
+html[data-booking-mode="auto"] .mode-semi{display:none !important;}
+    [data-booking-mode="auto"] .journal .payment-event{display:none !important;}
+html[data-booking-mode="semi"] .mode-auto{display:none !important;}
+
+/* Sur petits écrans : on évite le fixe dans la marge */
+@media (max-width:1024px){
+  .demo-float{position:static;left:auto;top:auto;margin:10px 0 0 0}
+}
+  
+        .link-subtle{color:#6b8a80;text-decoration:none;font-size:13px}
+        .link-subtle:hover{color:var(--brand-dark);text-decoration:underline}
+
+      .participants{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+      .participants-title{font-weight:700;color:var(--brand-dark);font-size:14px;margin-bottom:8px}
+      .participants-list{display:flex;flex-direction:column;gap:8px}
+      .p-item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.75)}
+      .p-name{font-weight:700;color:var(--ink)}
+      .p-meta{font-size:13px;color:var(--muted)}
+
+
+    /* CONTACT MODAL */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999}
+    .modal-backdrop.open{display:flex}
+    .modal{width:min(520px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.20);padding:14px}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .modal-title{font-weight:800;color:var(--brand-dark);font-size:15px}
+    .modal-close{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;color:var(--muted);font-weight:700}
+    .modal-close:hover{background:#f6fbf9}
+    .modal-actions{display:grid;grid-template-columns:1fr;gap:10px}
+    .modal-actions a{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none}
+    .btn-primary{background:var(--brand-dark);border-color:var(--brand-dark);color:#fff}
+    .btn-primary:hover{filter:brightness(.98)}
+
+  
+    
+    /* REFUSE MODAL (semi-auto) */
+    #refuseModal .warn{
+      background:#f6fbf8;
+      border:1px solid var(--line);
+      color:var(--ink);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:13px;
+      line-height:1.4;
+      margin:10px 0 12px;
+    }
+    .warn strong{font-weight:700}
+    .warn .sub{display:block;margin-top:6px;color:var(--muted);font-weight:600}
+#refuseModal .form{
+      display:grid;
+      gap:10px;
+      margin-top:6px;
+    }
+    #refuseModal label{
+      display:block;
+      font-size:13px;
+      color:var(--ink);
+      font-weight:800;
+      margin:0 0 6px;
+    }
+    #refuseModal .hint{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+    #refuseModal select,
+    #refuseModal textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      color:var(--ink);
+      background:#fff;
+      outline:none;
+    }
+    #refuseModal textarea{min-height:110px;resize:vertical}
+    #refuseModal select:focus,
+    #refuseModal textarea:focus{border-color:rgba(26,166,123,.55);box-shadow:0 0 0 3px rgba(26,166,123,.10)}
+    #refuseModal .err{
+      display:none;
+      font-size:12px;
+      color:var(--danger);
+      font-weight:700;
+      margin-top:6px;
+    }
+    
+    .help{ font-size:12px; color:var(--muted); margin-top:6px; line-height:1.35; }
+#refuseModal .row-actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      margin-top:8px;
+    }
+    #refuseModal .row-actions .btn{flex:0 0 auto}
+    #refuseModal .success{
+      display:none;
+      margin-top:10px;
+      padding:10px 12px;
+      border:1px solid rgba(34,139,34,.25);
+      background:rgba(34,139,34,.08);
+      border-radius:14px;
+      color:var(--ok);
+      font-weight:800;
+      font-size:13px;
+    }
+
+
+
+    /* APPROVE MODAL (semi-auto) */
+    #approveModal .warn{
+      background:#f6fbf8;
+      border:1px solid var(--line);
+      color:var(--ink);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:13px;
+      line-height:1.4;
+      margin:10px 0 12px;
+    }
+    #approveModal .row-actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      margin-top:8px;
+    }
+    #approveModal .row-actions .btn{flex:0 0 auto}
+    #approveModal .success{
+      display:none;
+      margin-top:10px;
+      padding:10px 12px;
+      border:1px solid rgba(34,139,34,.25);
+      background:rgba(34,139,34,.08);
+      border-radius:14px;
+      color:var(--ok);
+      font-weight:800;
+      font-size:13px;
+    }
+
+
+    /* PRINT — rendu premium (auto + semi) */
+    @media print{
+  /* Objectif: 1 page A4, stable (Chrome) */
+  @page{ size:A4 portrait; margin:4mm; }
+
+  html, body{
+    background:#fff !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    width:100% !important;
+    overflow:visible !important;
+  }
+
+  /* Une seule méthode de scaling = zoom (évite les conflits) */
+  body{
+    zoom:0.70;
+    font-size:11px !important;
+    line-height:1.22 !important;
+  }
+
+  /* Neutraliser tout transform/animations en print */
+  *, *::before, *::after{
+    animation:none !important;
+    transition:none !important;
+  }
+
+  .container{
+    max-width:none !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    transform:none !important;
+  }
+
+  /* Masquer les éléments non PDF */
+  .mode-switch,
+  .actions,
+  .demo-float,
+  .lang-switch,
+  .modal-backdrop,
+  .btn{
+    display:none !important;
+  }
+
+  /* Layout print: empilement vertical */
+  .grid{ display:block !important; }
+  .grid > aside.card,
+  .grid > main.card{
+    width:100% !important;
+    margin:0 0 3mm 0 !important;
+  }
+
+  /* Autoriser les coupures si nécessaire (sinon page 2) */
+  .card,
+  .grid > main.card .section,
+  .journal,
+  .jrow{
+    break-inside:auto !important;
+    page-break-inside:auto !important;
+  }
+
+  /* Rendu print propre */
+  .head, .card{ box-shadow:none !important; }
+  .card{ border:1px solid #d6e6df !important; padding:10px 12px !important; }
+  .section{ border:1px solid #d6e6df !important; border-radius:14px !important; padding:8px 10px !important; margin:0 0 2mm 0 !important; }
+
+  h1{ font-size:16px !important; margin:0 0 4px 0 !important; }
+  .kicker, .head-info{ font-size:11px !important; }
+
+  .row{ grid-template-columns:150px 1fr !important; gap:10px !important; padding:2px 0 !important; }
+
+  /* Journal: heure fixe, message wrappable */
+  .jrow{ gap:10px !important; padding:2px 0 !important; align-items:flex-start !important; }
+  .jrow > span{ flex:0 0 42mm !important; white-space:nowrap !important; }
+  .jrow div{ min-width:0 !important; white-space:normal !important; overflow-wrap:anywhere !important; word-break:break-word !important; }
+
+}
+
+
+    /* === ESIKIA — CTA (réutilisé) : switch langue FR/EN === */
+    .esikia-btn{
+      -webkit-appearance:none !important;
+      appearance:none !important;
+      border:1px solid rgba(230,241,235,.95) !important;
+      background:#fff !important;
+      color:#16352f !important;
+      border-radius:999px !important;
+      padding:10px 14px !important;
+      font-weight:800 !important;
+      font-size:13px !important;
+      cursor:pointer !important;
+      transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .12s ease !important;
+      box-shadow:0 10px 22px rgba(12, 68, 52, 0.06) !important;
+      text-decoration:none !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:8px !important;
+      white-space:nowrap !important;
+      line-height:1 !important;
+    }
+    .esikia-btn:hover{
+      border-color: rgba(20,184,166,.55) !important;
+      box-shadow:0 6px 18px rgba(20,184,166,.16) !important;
+      transform: translateY(-1px) !important;
+    }
+    .esikia-btn:active{
+      transform: translateY(0px) !important;
+      box-shadow:0 10px 22px rgba(12, 68, 52, 0.06) !important;
+    }
+    .esikia-btn:focus-visible{
+      outline: 3px solid rgba(40, 163, 123, 0.18) !important;
+      outline-offset: 2px !important;
+    }
+
+    .lang-mini.lang-switch{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-left:12px;
+      white-space:nowrap;
+    }
+    .lang-mini.lang-switch .sep{
+      color:rgba(16,24,40,.25);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:32px;
+      line-height:1;
+      padding:0 2px;
+    }
+    /* mobile: switch aligné à droite sous les CTAs */
+    @media (max-width: 820px){
+      .lang-mini.lang-switch{
+        align-self:flex-end;
+        margin-left:0;
+      }
+    }
+
+  
+
+/* === RESPONSIVE LIFT v31 — CSS ONLY (mobile-first, 2 breakpoints) === */
+html, body { width:100%; overflow-x:hidden; }
+img, svg, video, canvas { max-width:100%; height:auto; }
+
+/* Container */
+.container{ width:100%; max-width:1140px; margin:14px auto; padding:0 12px; }
+
+/* Header stack on mobile */
+.head{ display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+.head-left{ min-width:0; }
+.head-title{ display:grid; grid-template-columns:1fr; gap:10px; }
+.head-info{ flex-wrap:wrap; row-gap:6px; }
+
+/* Actions: 2 cols on mobile, no overflow */
+.actions{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; align-items:stretch; }
+.actions .btn{ width:100%; min-width:0; }
+.actions .lang-switch{ grid-column:1 / -1; justify-content:flex-end; margin-left:0; }
+
+/* Main grid: single column on mobile */
+.grid{ display:grid; grid-template-columns:1fr; gap:16px; }
+
+/* Definition rows: stack on mobile for readability */
+.row{ display:grid; grid-template-columns:1fr; gap:2px; padding:8px 0; }
+.row dt{ font-size:12.5px; }
+.row dd{ margin:0; font-size:14px; }
+
+/* Journal rows: keep time column stable, no wrap */
+.jrow{ display:flex; gap:10px; align-items:flex-start; }
+.jrow > span{ flex:0 0 118px; white-space:nowrap; }
+
+/* Demo float: do not overlay on mobile/tablet */
+.demo-float{ position:static; top:auto; left:auto; right:auto; bottom:auto; margin:10px 0 0 0; }
+
+/* Tablets (validation @820px) */
+@media (min-width:821px){
+  .container{ margin:18px auto; padding:0 16px; }
+  .head{ flex-direction:row; align-items:center; gap:16px; padding-left:18px; padding-right:18px; }
+  .actions{ display:flex; flex-wrap:wrap; justify-content:flex-end; align-items:center; gap:10px; }
+  .actions .btn{ width:auto; }
+  .actions .lang-switch{ margin-left:auto; }
+  .row{ grid-template-columns:clamp(150px, 18vw, 170px) minmax(0,1fr); gap:16px; padding:4px 0; }
+  .row dt, .row dd{ font-size:15px; }
+  .jrow{ align-items:center; }
+  .jrow > span{ flex:0 0 150px; }
+}
+
+/* Desktop (validation @1366px) */
+@media (min-width:1280px){
+  .grid{ grid-template-columns:clamp(340px, 30vw, 420px) minmax(0,1fr); }
+  /* Demo float: move to margin (no horizontal scroll) */
+  .demo-float{
+    position:fixed;
+    top:124px;
+    left:max(12px, calc((100vw - 1140px)/2 - 270px));
+    margin:0;
+    z-index:50;
+  }
+}
+
+
+    /* Démo (agence) : masqué sur mobile/tablette */
+    @media (max-width:1024px){
+      .demo-float{display:none !important;}
+    }
+</style>
+
+<style id="esikia-demo-nav-fixed">
+body.esikia-demo-nav-page{padding-bottom:96px}
+.esikia-demo-nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:12px;padding:10px;border-radius:999px;background:rgba(255,255,255,.96);border:1px solid rgba(16,24,40,.08);box-shadow:0 12px 30px rgba(15,23,42,.14);backdrop-filter:blur(10px)}
+.esikia-demo-nav a{text-decoration:none;color:inherit}
+.esikia-demo-nav .demo-btn{display:inline-flex;align-items:center;justify-content:center;min-width:132px;height:44px;padding:0 18px;border-radius:999px;border:1px solid #dfe7e4;background:#fff;color:#16352f;font-weight:800;font-size:14px;line-height:1;transition:.18s ease;box-shadow:none}
+.esikia-demo-nav .demo-btn:hover{border-color:rgba(20,184,166,.45);box-shadow:0 6px 18px rgba(20,184,166,.14);transform:translateY(-1px)}
+.esikia-demo-nav .demo-btn.primary{background:linear-gradient(90deg,#1c8c6d,#28a37b);color:#fff;border-color:transparent;box-shadow:0 12px 28px rgba(16,102,77,.22)}
+.esikia-demo-nav .demo-btn.primary:hover{box-shadow:0 14px 34px rgba(20,184,166,.22)}
+@media (max-width:720px){body.esikia-demo-nav-page{padding-bottom:164px}.esikia-demo-nav{left:12px;right:12px;bottom:12px;transform:none;justify-content:center;gap:8px;padding:8px;border-radius:18px}.esikia-demo-nav .demo-btn{min-width:0;flex:1 1 0;padding:0 12px;font-size:13px;height:42px}}
+</style>
+</head>
+<body class="esikia-demo-nav-page">
+  <div class="container">
+
+<div class="demo-float" aria-label="Sélecteur mode (démo)">
+  <div class="demo-pill"><label><input type="radio" name="demoMode" value="auto" checked> <span data-i18n="demo_auto">Démo — mode automatique</span></label></div>
+  <div class="demo-pill"><label><input type="radio" name="demoMode" value="semi"> <span data-i18n="demo_semi">Démo — mode semi-automatique</span></label></div>
+</div>
+    <header class="head">
+      <div class="head-left">
+        <div class="head-title">
+                    <div class="title-stack">
+            <h1 data-i18n="title_page">Fiche retraitant — Esikia</h1>
+            <div class="kicker mode-auto"><span data-i18n="lbl_retreat">Retraite :</span> Silence & prière — Abbaye Notre-Dame</div>
+            <div class="kicker mode-semi"><span data-i18n="lbl_retreat">Retraite :</span> Silence & prière</div>
+            <div class="kicker kicker-sub mode-semi">Abbaye Notre-Dame</div>
+            <div class="head-info">
+              <div><strong><span data-i18n="lbl_booking_ref">Réf. réservation</span> :</strong> R-2025-000123</div>
+              <div class="mode-auto"><strong><span data-i18n="lbl_people">Personnes</span> :</strong> 1</div>
+              <div class="mode-auto"><strong><span data-i18n="lbl_booked_on">Réservation faite le</span> :</strong> <span data-i18n="dt_booked_on_value">14 sept. 2025 — 12:03</span></div>
+
+              <div class="mode-semi head-inline-meta"><strong><span data-i18n="lbl_people">Personnes</span> :</strong> 1 <span class="meta-dot" aria-hidden="true">•</span> <strong><span data-i18n="lbl_booked_on">Réservation faite le</span> :</strong> <span data-i18n="dt_booked_on_value">14 sept. 2025 — 12:03</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<nav class="actions mode-auto">
+  <button class="btn js-contact" type="button"><span data-i18n="btn_contact">Contacter</span></button>
+  <button class="btn btn-secondary js-print" type="button"><span data-i18n="btn_print">Imprimer</span></button>
+</nav>
+
+<nav class="actions mode-semi">  <button class="btn js-approve" type="button"><span data-i18n="btn_approve">Valider la réservation</span></button>
+  <button class="btn js-contact" type="button" data-modal-title="Demander une précision" data-i18n-attr="data-modal-title" data-i18n-attr-key="modal_request_info_title"><span data-i18n="btn_request_info">Demander une précision</span></button>
+  <button class="btn btn-secondary js-print" type="button"><span data-i18n="btn_print">Imprimer</span></button>
+  <button class="btn btn-danger js-refuse" type="button"><span data-i18n="btn_decline">Refuser la réservation</span></button>
+</nav>
+
+<div class="lang-mini lang-switch" aria-label="Langue">
+  <button class="lang-btn is-active esikia-btn" type="button" data-lang="fr" aria-pressed="true">FR</button>
+  <span class="sep">|</span>
+  <button class="lang-btn esikia-btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+    </header>
+
+    <section class="grid">
+      <!-- LEFT COLUMN -->
+      <aside class="card">
+        <div class="profile">
+          <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Portrait DUVAL Nicolas" />
+          <div class="who">
+            <h2 style="margin:0 0 2px 0;color:var(--brand-dark)">DUVAL Nicolas</h2>
+            <div class="meta" style="color:var(--muted);font-size:14px"><span data-i18n="profile_meta">38 ans · Homme</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;border-top:1px solid var(--line);padding-top:8px">
+          <dl>
+            <div class="row"><dt data-i18n="lbl_phone">Téléphone</dt><dd><a href="tel:+33658940837">06 58 94 08 37</a></dd></div>
+            <div class="row"><dt data-i18n="lbl_email">Email</dt><dd><a href="mailto:n.duval@hotmail.com">n.duval@hotmail.com</a></dd></div>
+            <div class="row"><dt data-i18n="lbl_location">Localisation</dt><dd>Rennes (35) — 35200</dd></div>
+</dl>
+          <div class="chips">
+            <span class="chip warn">⚠ <span data-i18n="chip_peanut_allergy">Allergie arachides</span></span>
+            <span class="chip">🥦 <span data-i18n="chip_vegetarian">Végétarien</span></span>
+                        <span class="chip">🧎‍♂️ <span data-i18n="chip_seeking_silence">Silence recherché</span></span>
+          </div>
+        </div>
+
+        <div id="participantsBlock" class="participants" style="display:none">
+          <div class="participants-title" data-i18n="participants_title">Participants</div>
+          <div class="participants-list">
+            <div class="p-item"><span class="p-name">DUVAL Nicolas</span><span class="p-meta" data-i18n="p_meta_allergy_diet">Allergie : arachides · Régime : végétarien</span></div>
+            <div class="p-item"><span class="p-name">DUVAL Marie</span><span class="p-meta" data-i18n="p_meta_none">Aucune contrainte particulière</span></div>
+          </div>
+        </div>
+
+        <div class="section mode-auto" style="margin-top:40px">
+          <h3><span data-i18n="sec_payment_status">Paiement & Statut</span></h3>
+          <p><span class="status-badge"><span data-i18n="status_confirmed_paid">CONFIRMÉE — PAYÉE</span></span></p>
+          <dl>
+            <div class="row"><dt data-i18n="lbl_amount_paid">Montant payé</dt><dd class="money">280,00 €</dd></div>
+            <div class="row"><dt data-i18n="lbl_receipt">Reçu</dt><dd><a href="#">ES-251114-001 (PDF)</a></dd></div>
+<div class="row"><dt data-i18n="lbl_invoice">Facture</dt><dd><a href="#"><span data-i18n="lnk_download_pdf">Télécharger (PDF)</span></a></dd></div>
+</dl>
+        </div>
+      
+
+
+<div class="section mode-semi" style="margin-top:40px">
+  <h3><span data-i18n="sec_payment_status">Paiement & Statut</span></h3>
+  <p>
+    <span class="status-badge" style="background:#fff8e6;color:#8a5a00;border:1px solid #ffe2a8"><span data-i18n="status_pending_preauth_ok">EN ATTENTE — PRÉ-AUTORISATION OK</span></span>
+    <span class="below-badge"><span data-i18n="txt_payment_not_captured">Paiement non capturé : il sera déclenché après validation du lieu.</span></span>
+  </p>
+  <dl>
+    <div class="row"><dt data-i18n="lbl_amount">Montant</dt><dd class="money">280,00 €</dd></div>
+    <div class="row"><dt data-i18n="lbl_imprint">Empreinte</dt><dd>✅ OK (CB)</dd></div>
+    <div class="row"><dt data-i18n="lbl_expected_action">Action attendue</dt><dd><span class="mode-auto" data-i18n="val_mode_auto">Validation / refus du lieu</span><span class="mode-semi" data-i18n="val_mode_semi">Décision du lieu (valider ou refuser)</span></dd></div>
+</dl>
+</div></aside>
+
+      <!-- RIGHT COLUMN -->
+      <main class="card" style="display:flex;flex-direction:column;gap:12px">
+        <div class="section">
+          <h3>📅 <span data-i18n="sec_summary">Récapitulatif</span></h3>
+          <dl>
+            <div class="row"><dt data-i18n="lbl_arrival">Arrivée</dt><dd><strong><span data-i18n="val_arrival_date">Ven 14 nov 18H00</span></strong></dd></div>
+            <div class="row"><dt data-i18n="lbl_departure">Départ</dt><dd><strong><span data-i18n="val_departure_date">Dim 16 nov 14H00</span></strong></dd></div>
+                        <div class="row"><dt data-i18n="lbl_calendar">Calendrier</dt><dd><a class="link-subtle" href="#"><span data-i18n="lnk_add_calendar">Ajouter au calendrier (.ics)</span></a></dd></div>
+<div class="row"><dt data-i18n="lbl_host_note">Note du lieu</dt><dd><span data-i18n="val_host_note">Prévenir la cuisine (arachides). Accueil au portail Ouest.</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_arrival_time">Heure d’arrivée</dt><dd><span data-i18n="val_arrival_time">Entre 18H00 et 20H00 (souple)</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_retreatant_info">Infos du retraitant</dt><dd><span data-i18n="val_retreatant_info">Pays de Rennes — 1 h de route — pas de covoiturage</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_transport">Mode de déplacement</dt><dd><span data-i18n="val_transport">Voiture</span></dd></div>
+</dl>
+        </div>
+
+        <div class="section">
+          <h3>🍽️ <span data-i18n="sec_health_diet">Santé & Alimentation</span></h3>
+          <dl>
+            <div class="row"><dt data-i18n="lbl_allergies">Allergies</dt><dd class="danger">⚠ <span data-i18n="val_peanuts">Arachides</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_diet">Régime</dt><dd><span data-i18n="val_diet">Végétarien (œufs OK, lait OK)</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_intolerances">Intolérances</dt><dd><span data-i18n="val_intolerances">Lactose — légère (tolérée en petite quantité)</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_useful_info">Infos utiles</dt><dd><span data-i18n="val_useful_info">Hydratation régulière recommandée</span></dd></div>
+          </dl>
+        </div>
+
+        <div class="section">
+          <h3>♿ <span data-i18n="sec_accessibility">Accessibilité</span></h3>
+          <dl>
+            <div class="row"><dt data-i18n="lbl_mobility">Mobilité</dt><dd><span data-i18n="val_mobility">Autonome, évite les escaliers longs</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_equipment">Appareillage</dt><dd><span data-i18n="val_none">Aucun</span></dd></div>
+            <div class="row"><dt data-i18n="lbl_accommodation">Hébergement</dt><dd><span data-i18n="val_accommodation">Attribué par le lieu</span></dd></div>
+          </dl>
+        </div>
+
+        <div class="section">
+          <h3>📩 <span data-i18n="sec_journal">Journal</span></h3>
+          <div class="journal">
+            <div class="jrow mode-auto"><span data-i18n="ts_14sep_1846">14 sept. 18:46</span><div><span data-i18n="log_email_host">✅ Email envoyé à l’hôte</span></div></div>
+            <div class="jrow mode-semi"><span data-i18n="ts_14sep_1846">14 sept. 18:46</span><div><span data-i18n="log_req_details">✅ Demande de précision envoyée au retraitant</span></div></div>
+            <div class="jrow payment-event mode-semi"><span data-i18n="ts_14sep_1845">14 sept. 18:45</span><div><span data-i18n="log_preauth">✅ Pré-autorisation CB effectuée</span></div></div>
+            <div class="jrow payment-event mode-semi"><span data-i18n="ts_14sep_1844">14 sept. 18:44</span><div><span data-i18n="log_wait_host">⏳ En attente de décision du lieu</span></div></div>
+            <div class="jrow payment-event mode-auto"><span data-i18n="ts_14sep_1845">14 sept. 18:45</span><div><span data-i18n="log_book_paid">✅ Réservation confirmée (payée)</span></div></div>
+            <div class="jrow payment-event mode-auto"><span data-i18n="ts_14sep_1844">14 sept. 18:44</span><div><span data-i18n="log_payment_captured">✅ Paiement capturé</span></div></div>
+            <div class="jrow"><span data-i18n="ts_14sep_1830">14 sept. 18:30</span><div><span data-i18n="log_profile_update">✅ Profil mis à jour (allergie arachides)</span></div></div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var __lastTriggerContact = null;
+    var __lastTriggerRefuse = null;
+    var __lastTriggerApprove = null;
+
+
+    
+    var I18N = {
+      fr: {
+        title_page: "Fiche retraitant — Esikia",
+        lbl_retreat: "Retraite :",
+        lbl_booking_ref: "Réf. réservation",
+        lbl_people: "Personnes",
+        lbl_booked_on: "Réservation faite le",
+        btn_contact: "Contacter",
+        btn_print: "Imprimer",
+        btn_approve: "Valider la réservation",
+        btn_request_info: "Demander une précision",
+        btn_decline: "Refuser la réservation",
+        modal_request_info_title: "Demander une précision",
+        modal_contact_title: "Contacter",
+        modal_refuse_title: "Refuser la réservation",
+        modal_call: "📞 Appeler",
+        modal_email: "✉️ Envoyer un email",
+        modal_msg: "💬 Messagerie Esikia",
+        refuse_warn1: "Cette action mettra fin à la demande de retraite.",
+        refuse_warn2_strong: "Esikia informera automatiquement le retraitant",
+        refuse_warn2_rest: "(e-mail + messagerie) qu’aucun accueil n’est possible pour ces dates.",
+        refuse_warn3_part1: "La pré-autorisation sera annulée",
+        refuse_warn3_mid: "et",
+        refuse_warn3_part2: "aucun paiement ne sera opéré",
+        refuse_reason_lbl: "Motif du refus",
+        refuse_reason_ph: "Choisir un motif…",
+        refuse_reason_opt1: "Indisponibilité aux dates demandées",
+        refuse_reason_opt2: "Capacité d’accueil complète",
+        refuse_reason_opt3: "Profil non compatible avec les conditions du lieu",
+        refuse_reason_opt4: "Demande incomplète / précision nécessaire",
+        refuse_reason_opt5: "Autre",
+        refuse_err_reason: "Merci de sélectionner un motif.",
+        refuse_note_lbl: "Note au retraitant",
+        refuse_optional: "(facultatif)",
+        refuse_message_ph: "Ajouter une note (facultatif)…",
+        refuse_help: "Si vous souhaitez ajouter une note pour le retraitant dans le cadre du refus, vous pouvez l’insérer ici. Esikia la joindra à la notification (e-mail + messagerie).",
+        refuse_success: "Refus enregistré. Esikia prévient le retraitant.",
+        sec_payment_status: "Paiement & Statut",
+        sec_summary: "Récapitulatif",
+        sec_health_diet: "Santé & Alimentation",
+        sec_accessibility: "Accessibilité",
+        sec_journal: "Journal",
+        lbl_phone: "Téléphone",
+        lbl_email: "Email",
+        lbl_location: "Localisation",
+        chip_peanut_allergy: "Allergie arachides",
+        chip_vegetarian: "Végétarien",
+        chip_seeking_silence: "Silence recherché",
+        participants_title: "Participants",
+        p_meta_allergy_diet: "Allergie : arachides · Régime : végétarien",
+        p_meta_none: "Aucune contrainte particulière",
+        dt_booked_on_value: "14 sept. 2025 — 12:03",
+        ts_14sep_1846: "14 sept. 18:46",
+        ts_14sep_1845: "14 sept. 18:45",
+        ts_14sep_1844: "14 sept. 18:44",
+        ts_14sep_1830: "14 sept. 18:30",
+        status_confirmed_paid: "CONFIRMÉE — PAYÉE",
+        status_pending_preauth_ok: "EN ATTENTE — PRÉ-AUTORISATION OK",
+        txt_payment_not_captured: "Paiement non capturé : il sera déclenché après validation du lieu.",
+        lbl_amount_paid: "Montant payé",
+        lbl_receipt: "Reçu",
+        lbl_invoice: "Facture",
+        lnk_download_pdf: "Télécharger (PDF)",
+        lbl_amount: "Montant",
+        lbl_imprint: "Empreinte",
+        lbl_expected_action: "Action attendue",
+        lbl_arrival: "Arrivée",
+        lbl_departure: "Départ",
+        lbl_calendar: "Calendrier",
+        lnk_add_calendar: "Ajouter au calendrier (.ics)",
+        lbl_host_note: "Note du lieu",
+        lbl_arrival_time: "Heure d’arrivée",
+        lbl_retreatant_info: "Infos du retraitant",
+        lbl_transport: "Mode de déplacement",
+        profile_meta: "38 ans · Homme",
+        val_arrival_date: "Ven 14 nov 18H00",
+        val_departure_date: "Dim 16 nov 14H00",
+        val_arrival_time: "Entre 18H00 et 20H00 (souple)",
+        val_retreatant_info: "Pays de Rennes — 1 h de route — pas de covoiturage",
+        val_transport: "Voiture",
+        val_diet: "Végétarien (œufs OK, lait OK)",
+        val_intolerances: "Lactose — légère (tolérée en petite quantité)",
+        val_useful_info: "Hydratation régulière recommandée",
+        lbl_allergies: "Allergies",
+        val_peanuts: "Arachides",
+        lbl_diet: "Régime",
+        lbl_intolerances: "Intolérances",
+        lbl_useful_info: "Infos utiles",
+        lbl_mobility: "Mobilité",
+        lbl_equipment: "Appareillage",
+        val_none: "Aucun",
+        lbl_accommodation: "Hébergement",
+        btn_close: "Fermer",
+        btn_cancel: "Annuler",
+        btn_confirm_decline: "Confirmer le refus",
+        demo_auto: "Démo — mode automatique",
+        demo_semi: "Démo — mode semi-automatique",
+        val_mode_auto: "Validation / refus du lieu",
+        val_mode_semi: "Décision du lieu (valider ou refuser)",
+        val_accommodation: "Attribué par le lieu",
+        val_mobility: "Autonome, évite les escaliers longs",
+        val_host_note: "Prévenir la cuisine (arachides). Accueil au portail Ouest.",
+        log_email_host: "✅ Email envoyé à l’hôte",
+        log_req_details: "✅ Demande de précision envoyée au retraitant",
+        log_preauth: "✅ Pré-autorisation CB effectuée",
+        log_wait_host: "⏳ En attente de décision du lieu",
+        log_book_paid: "✅ Réservation confirmée (payée)",
+        log_payment_captured: "✅ Paiement capturé",
+        log_profile_update: "✅ Profil mis à jour (allergie arachides)",
+},
+      en: {
+        title_page: "Retreatant record — Esikia",
+        lbl_retreat: "Retreat:",
+        lbl_booking_ref: "Booking ref",
+        lbl_people: "People",
+        lbl_booked_on: "Booked on",
+        btn_contact: "Contact",
+        btn_print: "Print",
+        btn_approve: "Approve booking",
+        btn_request_info: "Request clarification",
+        btn_decline: "Decline booking",
+        modal_request_info_title: "Request clarification",
+        modal_contact_title: "Contact",
+        modal_refuse_title: "Decline booking",
+        modal_call: "📞 Call",
+        modal_email: "✉️ Send an email",
+        modal_msg: "💬 Esikia messaging",
+        refuse_warn1: "This action will end the retreat request.",
+        refuse_warn2_strong: "Esikia will automatically inform the retreatant",
+        refuse_warn2_rest: "(email + messaging) that hosting is not possible for these dates.",
+        refuse_warn3_part1: "The card pre-authorisation will be cancelled",
+        refuse_warn3_mid: "and",
+        refuse_warn3_part2: "no payment will be taken",
+        refuse_reason_lbl: "Reason for decline",
+        refuse_reason_ph: "Choose a reason…",
+        refuse_reason_opt1: "Unavailable for the requested dates",
+        refuse_reason_opt2: "Fully booked",
+        refuse_reason_opt3: "Profile not compatible with the host’s conditions",
+        refuse_reason_opt4: "Incomplete request / clarification needed",
+        refuse_reason_opt5: "Other",
+        refuse_err_reason: "Please select a reason.",
+        refuse_note_lbl: "Note to retreatant",
+        refuse_optional: "(optional)",
+        refuse_message_ph: "Add a note (optional)…",
+        refuse_help: "If you want to add a note for the retreatant as part of the decline, you can write it here. Esikia will attach it to the notification (email + messaging).",
+        refuse_success: "Decline recorded. Esikia notifies the retreatant.",
+        sec_payment_status: "Payment & Status",
+        sec_summary: "Summary",
+        sec_health_diet: "Health & Dietary",
+        sec_accessibility: "Accessibility",
+        sec_journal: "Log",
+        lbl_phone: "Phone",
+        lbl_email: "Email",
+        lbl_location: "Location",
+        chip_peanut_allergy: "Peanut allergy",
+        chip_vegetarian: "Vegetarian",
+        chip_seeking_silence: "Seeking silence",
+        participants_title: "Participants",
+        p_meta_allergy_diet: "Allergy: peanuts · Diet: vegetarian",
+        p_meta_none: "No specific constraints",
+        dt_booked_on_value: "Sep 14, 2025 — 12:03",
+        ts_14sep_1846: "Sep 14, 18:46",
+        ts_14sep_1845: "Sep 14, 18:45",
+        ts_14sep_1844: "Sep 14, 18:44",
+        ts_14sep_1830: "Sep 14, 18:30",
+        status_confirmed_paid: "CONFIRMED — PAID",
+        status_pending_preauth_ok: "PENDING — PRE-AUTH OK",
+        txt_payment_not_captured: "Payment not captured: it will be captured after the host approves.",
+        lbl_amount_paid: "Amount paid",
+        lbl_receipt: "Receipt",
+        lbl_invoice: "Invoice",
+        lnk_download_pdf: "Download (PDF)",
+        lbl_amount: "Amount",
+        lbl_imprint: "Pre-auth",
+        lbl_expected_action: "Next step",
+        lbl_arrival: "Arrival",
+        lbl_departure: "Departure",
+        lbl_calendar: "Calendar",
+        lnk_add_calendar: "Add to calendar (.ics)",
+        lbl_host_note: "Host note",
+        lbl_arrival_time: "Arrival time",
+        lbl_retreatant_info: "Retreatant info",
+        lbl_transport: "Transport",
+        profile_meta: "38 yrs · Male",
+        val_arrival_date: "Fri 14 Nov 18:00",
+        val_departure_date: "Sun 16 Nov 14:00",
+        val_arrival_time: "Between 6:00 PM and 8:00 PM (flexible)",
+        val_retreatant_info: "Rennes area — 1h drive — no carpooling",
+        val_transport: "Car",
+        val_diet: "Vegetarian (eggs OK, dairy OK)",
+        val_intolerances: "Lactose — mild (tolerated in small quantities)",
+        val_useful_info: "Regular hydration recommended",
+        lbl_allergies: "Allergies",
+        val_peanuts: "Peanuts",
+        lbl_diet: "Diet",
+        lbl_intolerances: "Intolerances",
+        lbl_useful_info: "Useful info",
+        lbl_mobility: "Mobility",
+        lbl_equipment: "Equipment",
+        val_none: "None",
+        lbl_accommodation: "Accommodation",
+        btn_close: "Close",
+        btn_cancel: "Cancel",
+        btn_confirm_decline: "Confirm decline",
+        btn_confirm_approve: "Confirm approval",
+        modal_approve_title: "Approve booking",
+        approve_warn1: "This action approves the booking.",
+        approve_warn2: "Esikia will automatically confirm the retreatant (email + messaging).",
+        approve_warn3_strong: "Payment will be captured",
+        approve_warn3_rest: "and the booking will become “Confirmed”.",
+        approve_success: "Approval recorded. Esikia confirms the booking.",
+        status_approved_paid: "CONFIRMED — PAID",
+        txt_payment_captured: "Payment captured: the booking is confirmed.",
+        log_host_approved: "✅ Booking approved by the host",
+        log_payment_captured_semi: "✅ Payment captured after approval",
+        demo_auto: "Demo — automatic mode",
+        demo_semi: "Demo — semi-automatic mode",
+        val_mode_auto: "Host validation / refusal",
+        val_mode_semi: "Host decision (approve or decline)",
+        val_accommodation: "Assigned by the host",
+        val_mobility: "Independent, avoid long stairs",
+        val_host_note: "Notify the kitchen (peanuts). Welcome at the West gate.",
+        log_email_host: "✅ Email sent to host",
+        log_req_details: "✅ Clarification request sent",
+        log_preauth: "✅ Card pre-authorisation done",
+        log_wait_host: "⏳ Waiting for host decision",
+        log_book_paid: "✅ Booking confirmed (paid)",
+        log_payment_captured: "✅ Payment captured",
+        log_profile_update: "✅ Profile updated (peanut allergy)",
+}
+    };
+
+    function applyI18n(lang){
+      var dict = I18N[lang] || I18N.fr;
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var key = el.getAttribute('data-i18n');
+        if(dict[key]) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-attr][data-i18n-attr-key]').forEach(function(el){
+        var attr = el.getAttribute('data-i18n-attr');
+        var key = el.getAttribute('data-i18n-attr-key');
+        if(attr && key && dict[key]) el.setAttribute(attr, dict[key]);
+      });
+    }
+function setLang(lang){
+      lang = (lang === 'en') ? 'en' : 'fr';
+      root.setAttribute('lang', lang);
+      try{ localStorage.setItem('esikiaLang', lang); }catch(e){}
+      document.querySelectorAll('.lang-mini .lang-btn').forEach(function(btn){
+        var isOn = (btn.getAttribute('data-lang') === lang);
+        btn.classList.toggle('is-active', isOn);
+        btn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+      });
+      applyI18n(lang);
+    }
+
+    function initLang(){
+      var stored = null;
+      try{ stored = localStorage.getItem('esikiaLang'); }catch(e){}
+      var current = stored || root.getAttribute('lang') || 'fr';
+      setLang(current);
+    }
+
+
+    function setMode(mode){
+      root.setAttribute('data-booking-mode', mode === 'semi' ? 'semi' : 'auto');
+    }
+
+
+    function updateParticipants(){
+      var n = parseInt(root.getAttribute('data-persons') || '1', 10);
+      var el = document.getElementById('participantsBlock');
+      if(!el) return;
+      el.style.display = (n && n > 1) ? 'block' : 'none';
+    }
+
+    initLang();
+
+    // Re-apply i18n after full DOM is parsed (modals are declared after the script tag)
+    document.addEventListener('DOMContentLoaded', function(){
+      applyI18n(root.getAttribute('lang') || 'fr');
+    });
+
+    document.addEventListener('change', function(e){
+      var t = e.target;
+      if(t && t.name === 'demoMode'){
+        setMode(t.value);
+      }
+    });
+
+
+    document.addEventListener('click', function(e){
+      var raw = e.target;
+      var t = (raw && raw.closest) ? raw.closest('.lang-btn') : raw;
+      if(t && t.classList && t.classList.contains('lang-btn')){
+        setLang(t.getAttribute('data-lang'));
+      }
+    });
+updateParticipants();
+      // Modal actions: conserver ordre/classes par défaut (mode auto), et basculer en mode "Demander une précision" (semi)
+      var __contactActions = (function(){
+        var m = document.getElementById('contactModal');
+        if(!m) return null;
+        var a = m.querySelector('.modal-actions');
+        if(!a) return null;
+        return {
+          box: a,
+          nodes: Array.prototype.slice.call(a.children),
+          classes: Array.prototype.slice.call(a.children).map(function(n){ return n.className; })
+        };
+      })();
+      function openContact(trigger){
+        __lastTriggerContact = trigger || null;
+        var m = document.getElementById('contactModal');
+        if(!m) return;
+
+        // Détermine le titre via la clé i18n (contact vs demande de précision)
+        var titleKey = 'modal_contact_title';
+        if(trigger && trigger.getAttribute){
+          var k = trigger.getAttribute('data-i18n-attr-key');
+          if(k) titleKey = k;
+        }
+
+        var modal = m.querySelector('.modal');
+        var ttl = m.querySelector('.modal-title');
+
+        if(ttl){
+          ttl.setAttribute('data-i18n', titleKey);
+        }
+        if(modal){
+          modal.setAttribute('data-i18n-attr-key', titleKey);
+        }
+
+        // applique immédiatement l'i18n (y compris si le modal est déjà ouvert)
+        var currentLang = root.getAttribute('lang') || 'fr';
+        applyI18n(currentLang);
+
+        // Mode semi : "Demander une précision" => Messagerie Esikia en action principale
+        if(__contactActions && __contactActions.box){
+          var mode = root.getAttribute('data-booking-mode');
+          var isPrecision = (mode === 'semi' && titleKey === 'modal_request_info_title');
+          if(isPrecision){
+            var box = __contactActions.box;
+            var msg = document.getElementById('esikiaMsgLink');
+            var tel = box.querySelector('a[href^="tel:"]');
+            var mail = box.querySelector('a[href^="mailto:"]');
+            if(msg){ msg.className = 'btn btn-primary'; }
+            if(tel){ tel.className = 'btn'; }
+            if(mail){ mail.className = 'btn'; }
+            // réordonner : messagerie, appeler, email
+            if(msg) box.appendChild(msg);
+            if(tel) box.appendChild(tel);
+            if(mail) box.appendChild(mail);
+          } else {
+            // restaurer ordre + classes par défaut (mode auto)
+            var box2 = __contactActions.box;
+            __contactActions.nodes.forEach(function(n, i){
+              n.className = __contactActions.classes[i] || n.className;
+              box2.appendChild(n);
+            });
+          }
+        }
+
+        m.classList.add('open');
+        m.setAttribute('aria-hidden','false');
+      }
+      function closeContact(){
+        var m = document.getElementById('contactModal');
+        if(!m) return;
+        // restaure le focus AVANT aria-hidden pour éviter le warning Chrome (a11y)
+        try{
+          if(__lastTriggerContact && __lastTriggerContact.focus){ __lastTriggerContact.focus(); }
+          else{ document.body.setAttribute('tabindex','-1'); document.body.focus(); }
+        }catch(e){}
+        m.classList.remove('open');
+        m.setAttribute('aria-hidden','true');
+      }
+      
+      // REFUSE MODAL (semi-auto)
+      function openRefuse(trigger){
+        __lastTriggerRefuse = trigger || null;
+        var m = document.getElementById('refuseModal');
+        if(!m) return;
+        // reset form
+        var sel = document.getElementById('refuseReason');
+        var msg = document.getElementById('refuseMessage');
+        var e1 = document.getElementById('refuseErrReason');
+        var e2 = document.getElementById('refuseErrMessage');
+        var ok = document.getElementById('refuseSuccess');
+        if(sel) sel.value = '';
+        if(msg) msg.value = '';
+        if(e1) e1.style.display = 'none';
+        if(e2) e2.style.display = 'none';
+        if(ok) ok.style.display = 'none';
+        m.classList.add('open');
+        m.setAttribute('aria-hidden','false');
+      }
+      function closeRefuse(){
+        var m = document.getElementById('refuseModal');
+        if(!m) return;
+        // restaure le focus AVANT aria-hidden pour éviter le warning Chrome (a11y)
+        try{
+          if(__lastTriggerRefuse && __lastTriggerRefuse.focus){ __lastTriggerRefuse.focus(); }
+          else{ document.body.setAttribute('tabindex','-1'); document.body.focus(); }
+        }catch(e){}
+        m.classList.remove('open');
+        m.setAttribute('aria-hidden','true');
+      }
+      function confirmRefuse(){
+        var sel = document.getElementById('refuseReason');
+        var msg = document.getElementById('refuseMessage');
+        var e1 = document.getElementById('refuseErrReason');
+        var e2 = document.getElementById('refuseErrMessage');
+        var ok = document.getElementById('refuseSuccess');
+        var valid = true;
+        if(sel && !sel.value){
+          valid = false;
+          if(e1) e1.style.display = 'block';
+        }else{
+          if(e1) e1.style.display = 'none';
+        }
+        // Note au retraitant : facultative
+        if(e2) e2.style.display = 'none';
+        if(!valid) return;
+        if(ok) ok.style.display = 'block';
+        window.setTimeout(function(){ closeRefuse(); }, 650);
+      }
+
+      // APPROVE MODAL (semi-auto)
+      function openApprove(trigger){
+        __lastTriggerApprove = trigger || null;
+        var m = document.getElementById('approveModal');
+        if(!m) return;
+        var ok = document.getElementById('approveSuccess');
+        if(ok) ok.style.display = 'none';
+        m.classList.add('open');
+        m.setAttribute('aria-hidden','false');
+      }
+      function closeApprove(){
+        var m = document.getElementById('approveModal');
+        if(!m) return;
+        // restaure le focus AVANT aria-hidden pour éviter le warning Chrome (a11y)
+        try{
+          if(__lastTriggerApprove && __lastTriggerApprove.focus){ __lastTriggerApprove.focus(); }
+          else{ document.body.setAttribute('tabindex','-1'); document.body.focus(); }
+        }catch(e){}
+        m.classList.remove('open');
+        m.setAttribute('aria-hidden','true');
+      }
+      function confirmApprove(){
+        var ok = document.getElementById('approveSuccess');
+        if(ok) ok.style.display = 'block';
+
+        // MAJ UI : statut semi-auto -> confirmée payée + journal + désactivation CTA
+        try{
+          var badge = document.querySelector('.section.mode-semi .status-badge');
+          if(badge){
+            badge.className = 'status-badge';
+            badge.setAttribute('style','');
+            var inner = badge.querySelector('[data-i18n]');
+            if(inner){ inner.setAttribute('data-i18n','status_approved_paid'); }
+          }
+          var below = document.querySelector('.section.mode-semi .below-badge [data-i18n]');
+          if(below){ below.setAttribute('data-i18n','txt_payment_captured'); }
+
+          // Journal : prepend évènements "validation" + "paiement capturé"
+          var j = document.querySelector('.section .journal');
+          if(j){
+            var r1 = document.createElement('div');
+            r1.className = 'jrow payment-event mode-semi';
+            r1.innerHTML = '<span data-i18n="ts_14sep_1902">14 sept. 19:02</span><div><span data-i18n="log_payment_captured2">✅ Paiement capturé après validation</span></div>';
+
+            var r2 = document.createElement('div');
+            r2.className = 'jrow mode-semi';
+            r2.innerHTML = '<span data-i18n="ts_14sep_1902">14 sept. 19:02</span><div><span data-i18n="log_host_approved">✅ Réservation validée par le lieu</span></div>';
+
+            j.insertBefore(r1, j.firstChild);
+            j.insertBefore(r2, j.firstChild);
+          }
+
+          var btn = document.querySelector('.js-approve');
+          if(btn){
+            btn.disabled = true;
+            btn.setAttribute('aria-disabled','true');
+            btn.style.opacity = '.55';
+            btn.style.cursor = 'not-allowed';
+          }
+
+          // re-apply i18n in current language for injected/updated nodes
+          var currentLang = root.getAttribute('lang') || 'fr';
+          applyI18n(currentLang);
+        }catch(e){}
+
+        window.setTimeout(function(){ closeApprove(); }, 650);
+      }
+
+
+document.addEventListener('click', function(e){
+      var t = e.target;
+      // normaliser la cible (ex: span dans un bouton)
+      if(t && t.closest){
+        t = t.closest('a,button,[data-close-modal],[data-close-refuse],#contactModal') || t;
+      }
+if(t && (t.classList && t.classList.contains('js-contact'))){
+          e.preventDefault(); openContact(t); return;
+        }
+        if(t && t.classList && t.classList.contains('js-pdf')){
+          e.preventDefault(); window.print(); return;
+        }
+
+        if(t && (t.classList && t.classList.contains('js-approve'))){
+          e.preventDefault(); openApprove(t); return;
+        }
+        if(t && (t.classList && t.classList.contains('js-refuse'))){
+          e.preventDefault(); openRefuse(t); return;
+        }
+        if(t && (t.id === 'approveCancel' || (t.hasAttribute && t.hasAttribute('data-close-approve')))){
+          e.preventDefault(); closeApprove(); return;
+        }
+        if(t && t.id === 'approveConfirm'){
+          e.preventDefault(); confirmApprove(); return;
+        }
+        if(t && (t.id === 'refuseCancel' || (t.hasAttribute && t.hasAttribute('data-close-refuse')))){
+          e.preventDefault(); closeRefuse(); return;
+        }
+        if(t && t.id === 'refuseConfirm'){
+          e.preventDefault(); confirmRefuse(); return;
+        }
+        if(t && t.classList && t.classList.contains('js-print')){
+          e.preventDefault(); window.print(); return;
+        }
+        if(t && (t.hasAttribute && t.hasAttribute('data-close-modal'))){
+          e.preventDefault(); closeContact(); return;
+        }
+        // click outside modal closes
+        if(t && t.id === 'contactModal'){
+          closeContact(); return;
+        }
+        if(t && t.id === 'refuseModal'){
+          closeRefuse(); return;
+        }
+        if(t && t.id === 'approveModal'){
+          closeApprove(); return;
+        }
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){ closeContact(); closeRefuse(); closeApprove(); }
+      });
+
+  })();
+</script>
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-backdrop" id="contactModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Contacter" data-i18n-attr="aria-label" data-i18n-attr-key="modal_contact_title">
+      <div class="modal-head">
+        <div class="modal-title" data-i18n="modal_contact_title">Contacter</div>
+        <button class="modal-close" type="button" data-close-modal><span data-i18n="btn_close">Fermer</span></button>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="tel:+33658940837"><span data-i18n="modal_call">📞 Appeler</span> — 06 58 94 08 37</a>
+        <a class="btn" href="mailto:n.duval@hotmail.com"><span data-i18n="modal_email">✉️ Envoyer un email</span></a>
+        <a class="btn" href="/messagerie?reservation=R-2025-000123" id="esikiaMsgLink"><span data-i18n="modal_msg">💬 Messagerie Esikia</span></a>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <!-- APPROVE MODAL (semi-auto) -->
+  <div class="modal-backdrop" id="approveModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Valider la réservation" data-i18n-attr="aria-label" data-i18n-attr-key="modal_approve_title">
+      <div class="modal-head">
+        <div class="modal-title" data-i18n="modal_approve_title">Valider la réservation</div>
+        <button class="modal-close" type="button" data-close-approve><span data-i18n="btn_close">Fermer</span></button>
+      </div>
+
+      <div class="warn">
+        <strong><span data-i18n="approve_warn1">Cette action valide la réservation.</span></strong><br>
+        <span data-i18n="approve_warn2">Esikia confirmera automatiquement le retraitant (e-mail + messagerie).</span><br>
+        <strong><span data-i18n="approve_warn3_strong">Le paiement sera capturé</span></strong> <span data-i18n="approve_warn3_rest">et la réservation passera au statut “Confirmée”.</span>
+      </div>
+
+      <div class="row-actions">
+        <button class="btn btn-secondary" type="button" id="approveCancel"><span data-i18n="btn_cancel">Annuler</span></button>
+        <button class="btn btn-primary" type="button" id="approveConfirm"><span data-i18n="btn_confirm_approve">Confirmer la validation</span></button>
+      </div>
+
+      <div class="success" id="approveSuccess" role="status" aria-live="polite" data-i18n="approve_success">
+        Validation enregistrée. Esikia confirme la réservation.
+      </div>
+    </div>
+  </div>
+
+
+<!-- REFUSE MODAL (semi-auto) -->
+  <div class="modal-backdrop" id="refuseModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Refuser la réservation" data-i18n-attr="aria-label" data-i18n-attr-key="modal_refuse_title">
+      <div class="modal-head">
+        <div class="modal-title" data-i18n="modal_refuse_title">Refuser la réservation</div>
+        <button class="modal-close" type="button" data-close-refuse><span data-i18n="btn_close">Fermer</span></button>
+      </div>
+
+      <div class="warn">
+        <strong><span data-i18n="refuse_warn1">Cette action mettra fin à la demande de retraite.</span></strong><br>
+        <strong><span data-i18n="refuse_warn2_strong">Esikia informera automatiquement le retraitant</span></strong> <span data-i18n="refuse_warn2_rest">(e-mail + messagerie) qu’aucun accueil n’est possible pour ces dates.</span><br>
+        <strong><span data-i18n="refuse_warn3_part1">La pré-autorisation sera annulée</span></strong> <span data-i18n="refuse_warn3_mid">et</span> <strong><span data-i18n="refuse_warn3_part2">aucun paiement ne sera opéré</span></strong>.
+</div>
+
+      <div class="form">
+        <div>
+          <label for="refuseReason"><span data-i18n="refuse_reason_lbl">Motif du refus</span> <span style="color:var(--danger)">*</span></label>
+          <select id="refuseReason" required>
+            <option value="" selected disabled data-i18n="refuse_reason_ph">Choisir un motif…</option>
+            <option data-i18n="refuse_reason_opt1">Indisponibilité aux dates demandées</option>
+            <option data-i18n="refuse_reason_opt2">Capacité d’accueil complète</option>
+            <option data-i18n="refuse_reason_opt3">Profil non compatible avec les conditions du lieu</option>
+            <option data-i18n="refuse_reason_opt4">Demande incomplète / précision nécessaire</option>
+            <option data-i18n="refuse_reason_opt5">Autre</option>
+          </select>
+          <div class="err" id="refuseErrReason" data-i18n="refuse_err_reason">Merci de sélectionner un motif.</div>
+</div>
+
+        <div>
+          <label for="refuseMessage"><span data-i18n="refuse_note_lbl">Note au retraitant</span> <span style="color:var(--muted);font-weight:600" data-i18n="refuse_optional">(facultatif)</span></label>
+          <textarea id="refuseMessage" placeholder="Ajouter une note (facultatif)…" data-i18n-attr="placeholder" data-i18n-attr-key="refuse_message_ph"></textarea>
+          <div class="help" data-i18n="refuse_help">Si vous souhaitez ajouter une note pour le retraitant dans le cadre du refus, vous pouvez l’insérer ici. Esikia la joindra à la notification (e-mail + messagerie).</div>
+        </div>
+
+        <div class="row-actions">
+          <button class="btn btn-secondary" type="button" id="refuseCancel"><span data-i18n="btn_cancel">Annuler</span></button>
+          <button class="btn btn-danger" type="button" id="refuseConfirm"><span data-i18n="btn_confirm_decline">Confirmer le refus</span></button>
+        </div>
+
+        <div class="success" id="refuseSuccess" role="status" aria-live="polite" data-i18n="refuse_success">
+          Refus enregistré. Esikia prévient le retraitant.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<nav class="esikia-demo-nav" aria-label="Navigation démo">
+  <a class="demo-btn" href="Template_NEUTRE_IMAGES_OFF.html">← Retour</a>
+  <a class="demo-btn" href="index.html">Index des démos</a>
+  <a class="demo-btn primary" href="Esikia_Appel_Aux_Dons.html">Suivant →</a>
+</nav>
+
+</body>
+</html>
