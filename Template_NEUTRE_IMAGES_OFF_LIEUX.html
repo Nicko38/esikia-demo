@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Esikia — Template Retraites (Carrousel pilote le Focus)</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>
+:root{
+  --bg:#eaf6f2;
+  --green:#2fa37a;
+  --green2:#238a67;
+  --dark:#1f2d2b;
+  --soft:#6b7d79;
+  --white:#ffffff;
+  --line:#eef3f2;
+  --mint:#d0ebe3;
+  --mint2:#e7f6f1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--dark)}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:40px 20px}
+.block{background:var(--white);border-radius:14px;padding:32px;margin-bottom:40px}
+h2{margin:0 0 16px;color:var(--green)}
+.sub{margin:0 0 18px;color:var(--soft);font-size:.95rem}
+header{padding:12px 0;background:var(--white);border-bottom:1px solid rgba(16,24,40,.08)}
+.header-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 18px}
+.brand-lockup{display:flex;align-items:center;gap:10px}
+.brand-logo{width:44px;height:44px;border-radius:12px;background:rgba(47,163,122,.12);border:1px solid rgba(47,163,122,.35);display:inline-block;flex:0 0 auto}
+.brand-link{display:block;line-height:0}
+.brand-link svg{display:block}
+
+.nav a{margin-left:18px;font-weight:600}
+
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;border:1px solid var(--green);color:var(--green);font-weight:700}
+.btn:hover{background:var(--green);color:#fff}
+.btn-sm{display:inline-flex;padding:12px 18px;border-radius:12px;border:1px solid var(--green);color:var(--green);font-weight:800;font-size:16px;align-items:center;justify-content:center;text-align:center;line-height:1;gap:8px;transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .12s ease;background:#fff}
+.btn-sm:hover{background:var(--green);color:#fff}
+.btn-solid{display:inline-block;padding:9px 14px;border-radius:999px;border:1px solid var(--green);background:var(--green);color:#fff;font-weight:800;font-size:13px}
+.btn-solid:hover{background:var(--green2)}
+
+/* === CTA STYLE (référence Admin Hôte) — rendu complet === */
+/* Périmètre strict : CTAs existants uniquement (.btn / .btn-sm / .btn-solid) */
+.btn,.btn-sm,.btn-solid{
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1;
+  gap:8px;
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .12s ease;
+}
+
+/* Outline (équivalent Admin .cta) */
+.btn,.btn-sm{
+  background:#fff;
+  border:1px solid var(--green);
+  color:var(--green);
+  font-weight:800;
+}
+.btn:hover,.btn-sm:hover{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 4px 10px rgba(47,163,122,.25);
+  transform: translateY(-1px);
+}
+
+/* Primary (équivalent Admin .btn.primary) */
+.btn-solid{
+  background:var(--green);
+  border:1px solid var(--green);
+  color:#fff;
+  font-weight:900;
+}
+.btn-solid:hover{
+  background:var(--green2);
+  border-color:var(--green2);
+  box-shadow:0 4px 12px rgba(47,163,122,.22);
+  transform: translateY(-1px);
+}
+
+/* Focus visible (halo propre) */
+.btn:focus-visible,.btn-sm:focus-visible,.btn-solid:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(47,163,122,.18), 0 4px 12px rgba(47,163,122,.18);
+}
+
+/* Point vert lumineux sur CTA "Je réserve ma place" (périmètre: #focusReserve uniquement) */
+#focusReserve .reserve-dot{
+  width:10px;height:10px;border-radius:999px;
+  background:#39d98a;
+  box-shadow:0 0 0 3px rgba(57,217,138,.22), 0 0 14px rgba(57,217,138,.85);
+  flex:0 0 auto;
+}
+
+/* Assure un centrage parfait du texte dans les CTAs du carrousel */
+.slide-actions{justify-content:center;}
+.slide-actions .choose-btn{display:inline-flex;align-items:center;justify-content:center;}
+
+/* ===== BLOC 1 — CARROUSEL ===== */
+.carousel-wrap{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.carousel-title{margin:0;color:var(--green);font-weight:900}
+.carousel-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;justify-content:center;font-size:12px;line-height:1.2;padding:3px 8px;border-radius:999px;background:#f8fafc;border:1px solid var(--line);color:var(--ink)}
+
+/* Ancre sous carrousel */
+.jump-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:12px;flex-wrap:wrap}
+.minihint{color:var(--soft);font-size:.9rem}
+.anchor-link{font-weight:800;color:var(--green);display:inline-flex;align-items:center;gap:8px}
+.anchor-link:hover{color:var(--green2)}
+.anchor-dot{width:10px;height:10px;border-radius:999px;background:var(--green)}
+
+/* Carrousel horizontal */
+.carousel{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-padding-left: 14px;
+  scroll-padding-right: 14px;
+  padding: 6px 14px 12px 14px; /* marge pour éviter les cards 'coupées' au chargement */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== CARROUSEL — NAVIGATION (flèches visibles, sans dépendre du scroll) ===== */
+.carousel-nav-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:6;
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#ffffff;
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow: 0 6px 16px rgba(15,23,42,.08);
+}
+.carousel-nav-btn:hover{
+  border-color: rgba(47,163,122,.45);
+  box-shadow: 0 10px 22px rgba(47,163,122,.16);
+}
+
+/* Fix: empêcher le hover global .esikia-btn (translateY(-1px)) de faire "sauter" les flèches */
+.carousel-nav-btn.esikia-btn:hover,
+.carousel-nav-btn.esikia-btn:focus,
+.carousel-nav-btn.esikia-btn:active,
+.carousel-nav-btn.esikia-btn:focus-visible{
+  transform: translateY(-50%) !important;
+}
+.carousel-nav-btn:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+.carousel-prev{ left:6px; }
+.carousel-next{ right:6px; }
+/* Garder les fades derrière les flèches */
+.carousel-fade-left,.carousel-fade-right{ z-index:4; }
+.carousel{ position:relative; z-index:3; }
+/* Laisser un peu d’air pour que les flèches ne masquent pas les cards */
+.carousel{ padding-left: 52px; padding-right: 52px; }
+@media (max-width: 720px){
+  .carousel-nav-btn{ width:40px;height:40px;font-size:20px; }
+  .carousel{ padding-left: 48px; padding-right: 48px; }
+}
+
+.carousel:focus{outline:none}
+.carousel::-webkit-scrollbar{height:10px}
+.carousel::-webkit-scrollbar-thumb{background:#cfe8e1;border-radius:999px}
+.carousel::-webkit-scrollbar-track{background:#f3fbf8;border-radius:999px}
+
+/* Fade aux bords du carrousel (aide visuelle, très léger) */
+.carousel-shell{position:relative}
+.carousel-fade-left,.carousel-fade-right{
+  position:absolute;top:0;bottom:18px;width:32px;pointer-events:none;border-radius:14px;
+}
+.carousel-fade-left{left:0;background:linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,0))}
+.carousel-fade-right{right:0;background:linear-gradient(270deg, rgba(255,255,255,.95), rgba(255,255,255,0))}
+
+.slide{
+  position:relative;
+  min-width: 340px;
+  max-width: 340px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  scroll-snap-align:start;
+  scroll-snap-stop: always;
+  display:flex;
+  flex-direction:column;
+  cursor:pointer;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .12s ease;
+}
+.slide:hover{transform: translateY(-1px)}
+.slide-img{height:170px;background:var(--mint);background-size:cover;background-position:center;background-repeat:no-repeat}
+.slide-body{padding:14px;display:flex;flex-direction:column;gap:10px}
+.slide-title{margin:0;font-weight:900}
+.slide-meta{margin:0;color:var(--soft);font-size:.9rem;line-height:1.35}
+.slide-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* Slide actif = highlight + badge "Sélection" */
+.slide.is-active{
+  border-color: rgba(47,163,122,.55);
+  box-shadow: 0 10px 26px rgba(31,45,43,.08);
+  background: linear-gradient(0deg, rgba(231,246,241,.45), rgba(231,246,241,.45)), #fff;
+}
+.badge-selected{
+  position:absolute;top:12px;left:12px;
+  padding:7px 10px;border-radius:999px;
+  font-size:12px;font-weight:900;
+  background: rgba(47,163,122,.10);
+  border:1px solid rgba(47,163,122,.30);
+  color: var(--green2);
+  display:none;
+}
+.slide.is-active .badge-selected{display:inline-flex}
+
+/* ===== BLOC 2 — FOCUS (texte à gauche, image à droite) ===== */
+.focus-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.focus-status{
+  display:inline-flex;align-items:center;gap:10px;
+  font-weight:900;color:var(--green2);
+  background: rgba(47,163,122,.10);
+  border:1px solid rgba(47,163,122,.30);
+  padding:10px 12px;border-radius:999px;
+  font-size:13px;
+}
+.focus{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:stretch}
+.focus-visual{border-radius:14px;border:1px solid var(--line);background:var(--mint);min-height:260px}
+.focus-card{border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px;background:#fff}
+ .focus-title{margin:0;font-size:1.25rem;font-weight:950}
+.focus-sub{margin:-8px 0 2px;color:var(--soft);font-size:.95rem;line-height:1.35}
+.focus-frame{border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;background:#fbfdfc}
+.focus-frame-title{margin:0 0 8px;font-size:13px;font-weight:900;color:var(--dark);letter-spacing:.1px}
+.focus-frame ul{margin:0;padding-left:18px;color:var(--soft);font-size:13px;line-height:1.35}
+.focus-frame li{margin:6px 0}
+
+.kpis{display:flex;gap:10px;flex-wrap:wrap}
+.kpi{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  line-height:1.1;
+  padding:7px 10px;
+  border-radius:999px;
+  background:#d7f1e7; /* plus dense */
+  border:1px solid #74c9ab; /* bord plus net */
+  color:#0f5b45; /* texte plus foncé */
+  font-weight:700;
+  box-shadow:0 1px 0 rgba(0,0,0,.04);
+}
+.warn{
+  background:#ffe6cf; /* plus lisible */
+  border:1px solid #ffb77a;
+  color:#9a3f00;
+  font-weight:700;
+}
+
+.focus-text{margin:0;color:var(--soft);line-height:1.45}
+.focus-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+
+/* autres blocs */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
+.reassurance{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cta-final{text-align:center}
+footer{text-align:center;padding:40px 20px;color:var(--soft);font-size:.9rem;background:var(--white);border-top:1px solid rgba(16,24,40,.08)}
+
+@media(max-width:900px){
+  .slide{min-width:78vw;max-width:78vw}
+  .steps,.reassurance{grid-template-columns:1fr}
+  .focus{grid-template-columns:1fr}
+}
+
+/* === FORCE CTA ALIGNMENT (CAROUSEL) === */
+.carousel .slide,
+.carousel .slide-inner{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+.carousel .slide-body{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.carousel .slide-cta,
+.carousel .cta,
+.carousel .actions{
+  margin-top:auto !important;
+  display:flex !important;
+  justify-content:center !important;
+}
+
+.carousel .btn-select{
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+
+
+/* --- FIX: cartes carrousel même taille + CTA centré en bas --- */
+.carousel{scroll-padding-left:18px;scroll-padding-right:18px;}
+.slide{height:420px;} /* hauteur uniforme */
+.slide-img{height:190px;} /* équilibre avec le corps */
+.slide-body{
+  padding:16px 16px 18px 16px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  gap:8px;
+}
+.slide-title{
+  margin:2px 0 0 0;
+  font-size:18px;
+  line-height:1.15;
+  min-height:42px;           /* aligne les titres */
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.slide-meta{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.25;
+  min-height:34px;           /* aligne les métas */
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.slide-actions{
+  margin-top:auto;           /* pousse le CTA en bas */
+  display:flex;
+  justify-content:center;    /* centre horizontalement */
+  align-items:center;
+}
+.slide-actions .choose-btn{
+  width:auto;
+  min-width:140px;           /* présence visuelle stable */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+/* petit espace de respiration pour éviter l'effet "collé" */
+.carousel{padding:12px 18px 14px 18px;}
+
+
+/* === Bloc fusion : Parcours simple et encadré === */
+.fusion-block{
+  background:#ffffff;
+  border-radius:16px;
+  margin:32px auto;
+  padding:32px;
+  max-width:1180px;
+}
+.fusion-block h2{
+  color:#2f8f6b;
+  margin-bottom:20px;
+}
+.fusion-items{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.fusion-item{
+  background:#f6fbf9;
+  border-radius:12px;
+  padding:16px;
+  font-size:14px;
+}
+
+
+
+/* Fusion bloc 3+4 */
+.block.merged .merged-wrap{display:flex;flex-direction:column;gap:18px;}
+.block.merged .merged-part h3{margin:0 0 10px 0;font-size:14px;font-weight:800;color:var(--green);letter-spacing:.2px;}
+.block.merged .merged-part .steps,
+.block.merged .merged-part .reassurance{margin-top:0;}
+
+
+/* Footer minimal (vente) */
+.footer-min{
+  margin-top:28px;
+  padding:18px 0 8px;
+  border-top:1px solid rgba(16,24,40,.08);
+  background: var(--white);
+}
+.footer-min .footer-inner{
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 18px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:22px;
+  flex-wrap:nowrap;
+}
+.footer-min .footer-links{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:10px 14px;
+  font-size:12.5px;
+  color:rgba(16,24,40,.72);
+  white-space:nowrap;
+}
+.footer-min .footer-links a{
+  color:rgba(16,24,40,.72);
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.footer-min .footer-links a:hover{ border-bottom-color: rgba(16,24,40,.35); }
+.footer-min .footer-right{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.footer-min .lang-mini{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:12.5px;
+}
+.footer-min .lang-mini button{
+  background:transparent;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  color:rgba(16,24,40,.72);
+  font-weight:600;
+}
+.footer-min .lang-mini .sep{
+  color:rgba(16,24,40,.25);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:32px;
+  line-height:1;
+  padding:0 2px;
+}
+.footer-min .lang-mini button.is-active{ color: var(--green, #2F8F6B); }
+.footer-min .legal{
+  font-size:12px;
+  color:rgba(16,24,40,.55);
+  white-space:nowrap;
+  padding:0;
+  margin:0;
+}
+
+
+/* === FOOTER ONE-LINE (DESKTOP) + WRAP (MOBILE) === */
+@media(max-width:720px){
+  .footer-min .footer-inner{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px 14px;
+  }
+  .footer-min .footer-links{
+    flex-wrap:wrap;
+    justify-content:center;
+    white-space:normal;
+  }
+  .footer-min .legal{ order:3; }
+  .footer-min .footer-right{ order:2; }
+}
+
+/* ===========================
+   STEP 2 — MODALE CONFIRMATION
+   (V1 démo intégrée — Option A)
+   =========================== */
+#step2ModalOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 24, 24, .55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+}
+#step2ModalOverlay.is-open{ display:flex; }
+
+#step2Modal{
+  width: min(980px, 96vw);
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 22px 80px rgba(0,0,0,.25);
+  overflow: hidden;
+  border: 1px solid rgba(20, 60, 50, .10);
+}
+
+.step2-topbar{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(20, 60, 50, .08);
+  background: #ffffff;
+}
+
+.step2-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 700;
+  color:#0c3b33;
+}
+.step2-dot{
+  width:10px;height:10px;border-radius:999px;
+  background:#1f7a6a;
+  box-shadow: 0 0 0 5px rgba(31,122,106,.14);
+}
+.step2-pill{
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(31,122,106,.35);
+  background: rgba(31,122,106,.12);
+  color:#0c3b33;
+  white-space: nowrap;
+}
+
+.step2-close{
+  border: 1px solid rgba(20, 60, 50, .18);
+  background:#fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transition: transform .08s ease, box-shadow .12s ease;
+}
+.step2-close:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.10); }
+
+.step2-body{
+  padding: 22px 22px 18px;
+}
+.step2-title{
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 6px 0 6px;
+  color:#0b2f29;
+}
+.step2-subtitle{
+  margin: 0 0 14px;
+  color:#2f4a45;
+  font-weight: 500;
+}
+
+.step2-chips{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+.step2-chip{
+  font-size: 13px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 60, 50, .18);
+  background: rgba(31,122,106,.06);
+  color:#0b2f29;
+}
+
+.step2-box{
+  border: 1px solid rgba(31,122,106,.28);
+  background: rgba(31,122,106,.06);
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+}
+.step2-box h4{
+  margin: 0 0 10px;
+  color:#0b2f29;
+  font-size: 15px;
+}
+.step2-box ul{ margin: 0; padding-left: 18px; }
+.step2-box li{
+  margin: 6px 0;
+  color:#173d37;
+}
+.step2-box b{ color:#0b2f29; }
+
+.step2-actions{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 16px;
+  padding: 0 2px 2px;
+}
+.step2-back{
+  border-radius: 14px;
+  padding: 12px 16px;
+  border: 1px solid rgba(20, 60, 50, .18);
+  background: #f6f7f7;
+  color:#0b2f29;
+  font-weight: 700;
+  cursor:pointer;
+}
+.step2-primary{
+  border-radius: 16px;
+  padding: 14px 18px;
+  border: 1px solid rgba(20, 60, 50, .18);
+  background: #1f7a6a;
+  color:#fff;
+  font-weight: 800;
+  cursor:pointer;
+  box-shadow: 0 14px 30px rgba(31,122,106,.22);
+}
+.step2-primary:hover{ filter: brightness(.98); }
+
+@media (max-width: 640px){
+  #step2Modal{ width: 98vw; border-radius: 16px; }
+  .step2-title{ font-size: 24px; }
+  .step2-actions{ flex-direction: column; align-items: stretch; }
+  .step2-back, .step2-primary{ width: 100%; }
+}
+
+</style>
+<style id="esikia-cta-v99">
+/* === ESIKIA — CTA (aligné Page Vente v99) — injection ciblée === */
+.esikia-btn{
+  -webkit-appearance:none !important;
+  appearance:none !important;
+  border:1px solid rgba(230,241,235,.95) !important;
+  background:#fff !important;
+  color:#16352f !important;
+  border-radius:999px !important;
+  padding:10px 14px !important;
+  font-weight:800 !important;
+  font-size:13px !important;
+  cursor:pointer !important;
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .12s ease !important;
+  box-shadow:0 10px 22px rgba(12, 68, 52, 0.06) !important;
+  text-decoration:none !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  white-space:nowrap !important;
+}
+.esikia-btn:hover{
+  border-color: rgba(20,184,166,.55) !important;
+  box-shadow:0 6px 18px rgba(20,184,166,.16) !important;
+  transform: translateY(-1px) !important;
+}
+.esikia-btn:active{
+  transform: translateY(0px) !important;
+  box-shadow:0 10px 22px rgba(12, 68, 52, 0.06) !important;
+}
+.esikia-btn:focus-visible{
+  outline: 3px solid rgba(40, 163, 123, 0.18) !important;
+  outline-offset: 2px !important;
+}
+.esikia-btn.esikia-btn--primary{
+  border-color: rgba(28,140,109,.25) !important;
+  background: linear-gradient(90deg, #1c8c6d, #28a37b) !important;
+  color:#fff !important;
+  box-shadow: 0 12px 28px rgba(16, 102, 77, 0.22) !important;
+}
+.esikia-btn.esikia-btn--primary:hover{
+  filter: brightness(.98) !important;
+  box-shadow: 0 14px 34px rgba(20,184,166,.22) !important;
+  border-color: rgba(20,184,166,.75) !important;
+}
+</style><style id="esikia-capsules-from-admin-v66">
+/* === ESIKIA — Capsules (alignées Admin Hôte v66) — injection ciblée === */
+/* Périmètre : composants type "capsule/pill" du Template (kpi, chip, badge-selected) uniquement. */
+
+/* Base pill (même gabarit que .pill dans Admin) */
+.kpi,
+.chip{
+  padding:3px 10px !important;
+  border-radius:999px !important;
+  border:1px solid #e2e8f0 !important;
+  background:#f8fafc !important;
+  font-size:12px !important;
+  font-weight:400 !important;
+  line-height:1.2 !important;
+  color:#0f172a !important;
+}
+
+/* Variante OK (vert) — équivalent .pill.ok */
+.kpi.ok,
+.chip.ok,
+.badge-selected{
+  background:#ecfdf5 !important;
+  border-color:rgba(16,185,129,.5) !important;
+  color:#065f46 !important;
+}
+
+/* Variante WARN (orange) — équivalent .pill.warn */
+.kpi.warn,
+.chip.warn{
+  background:#fff6e9 !important;
+  border-color:#ffe2bd !important;
+  color:#e57f00 !important;
+}
+
+/* Variante OFF (gris) — équivalent .pill.offsoft */
+.kpi.offsoft,
+.chip.offsoft{
+  background:#f4f4f5 !important;
+  border-color:#d7d7d8 !important;
+  color:#555555 !important;
+}
+
+/* === FIN injection capsules === */
+</style>
+<style id="esikia-capsules-adminv66-override">
+/* === Capsules (copie visuelle Admin Hôte v66) — override tardif === */
+
+/* Base pill (neutral) */
+.chip,
+.badge,
+[class*="badge-"],
+.focus-status{
+  display:inline-flex !important;
+  align-items:center !important;
+  border-radius:18px !important;
+  padding:3px 10px !important;
+  font-size:13px !important;
+  font-weight:400 !important;
+  line-height:1.2 !important;
+  border:1px solid #e2e8f0 !important;
+  background:#f8fafc !important;
+  color:#0f172a !important;
+}
+
+/* OK (vert) — utilisé pour "Sélection" + statut focus */
+.badge-selected,
+.focus-status{
+  background:#ecfdf5 !important;
+  border-color:rgba(16,185,129,.5) !important;
+  color:#065f46 !important;
+}
+
+/* Orange warning (si réutilisé dans la page template) */
+.pill.warn,
+.badge-warn,
+.badge-warning{
+  background:#fff6e9 !important;
+  border-color:#ffe2bd !important;
+  color:#e57f00 !important;
+}
+
+/* OFF / neutral grey helpers (si besoin) */
+.pill.offsoft,
+.badge-offsoft{
+  background:#f4f4f5 !important;
+  border-color:#d7d7d8 !important;
+  color:#555555 !important;
+}
+</style>
+<style id="section-title-same-size-fix">
+/* Force same hierarchy for the 2 section headers */
+.carousel-title{
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 6px 0 !important;
+}
+.section-title{
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+}
+</style>
+<style id="focus-title-size-tweak">
+/* Micro-tweak: "Votre retraite" légèrement plus petit (sans impacter les autres titres) */
+#focus .section-title{
+  font-size: 1.32rem !important;
+}
+</style>
+<style id="admin-pill-capsules">
+/* Capsules alignées sur l'Admin Hôte (pill) */
+.pill{padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:#f8fafc;font-size:12px}
+.pill.ok{background:#ecfdf5;border-color:rgba(16,185,129,.5);color:#065f46}
+.pill.warn{background:#fff7ed;border-color:#fdba74;color:#9a3412}
+</style>
+<style id="carrousel-cards-halo-match-cta-v20">
+/* === Carrousel cards — halo + contour vert (aligné CTA "Je réserve ma place") === */
+/* Périmètre strict : uniquement les cards du carrousel (.slide) et leurs états hover/active/focus-within. */
+
+.slide{
+  /* garde-fou : transition déjà présente, on complète juste pour la cohérence du halo */
+  transition: border-color .18s ease, box-shadow .18s ease, transform .12s ease, background-color .18s ease;
+}
+
+/* Hover : même signature que .esikia-btn:hover (contour vert + halo doux) */
+.slide:hover{
+  border-color: rgba(20,184,166,.55) !important;
+  box-shadow: 0 6px 18px rgba(20,184,166,.16) !important;
+}
+
+/* Focus clavier sur card : halo propre, comme focus-visible CTA */
+.slide:focus-within{
+  border-color: rgba(20,184,166,.55) !important;
+  box-shadow: 0 0 0 3px rgba(40,163,123,.18), 0 6px 18px rgba(20,184,166,.16) !important;
+}
+
+/* Active (sélectionnée) : contour vert un peu plus affirmé + halo plus présent (sans bourrin) */
+.slide.is-active{
+  border-color: rgba(20,184,166,.75) !important;
+  box-shadow: 0 12px 28px rgba(16,102,77,.22) !important;
+}
+</style>
+<style id="merged-block-v2">
+/* Upgrade bloc "Déroulé & cadre de confiance" (V1) – cohérent avec les blocs au-dessus */
+.block.merged .sub{margin-top:8px;margin-bottom:16px;color:rgba(15,30,26,.72);font-size:14px;line-height:1.35}
+.merged-wrap.v2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width: 980px){.merged-wrap.v2{grid-template-columns:1fr}}
+.steps.v2,.reassurance.v2{display:grid;gap:12px}
+
+.step-card,.trust-card{
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:14px;
+  padding:14px 14px 13px;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);
+}
+.step-head,.trust-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.step-n{
+  width:26px;height:26px;border-radius:999px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(208,235,227,.95);
+  border:1px solid rgba(47,163,122,.55);
+  color:#0f513d;
+  font-weight:900;
+  font-size:12px;
+  box-shadow:0 0 0 3px rgba(47,163,122,.12);
+}
+.step-title,.trust-title{font-weight:800;color:#0b3b2d;font-size:14px;letter-spacing:.1px}
+.step-desc,.trust-desc{color:rgba(15,30,26,.78);font-size:13px;line-height:1.35}
+
+.trust-dot{
+  width:10px;height:10px;border-radius:999px;
+  background:#2fa37a;
+  opacity:1;
+  box-shadow:0 0 0 3px rgba(47,163,122,.14), 0 0 12px rgba(47,163,122,.45);
+}
+</style>
+<style id="step2-modal-open-css">
+/* Visibility is controlled by #step2ModalOverlay (display:none / flex). */
+#step2Modal{display:block;}
+</style>
+<style>
+/* ===============================
+   RESPONSIVE LIFT — v11 (CLEAN)
+   MOBILE HEADER CTAs: 2 LINES NICKEL
+   CSS only | Desktop untouched
+   =============================== */
+
+@media (max-width: 430px) {
+  html, body { overflow-x: hidden; }
+  img, video { max-width: 100%; height: auto; }
+
+  header .header-inner{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:12px !important;
+    padding:0 18px !important;
+  }
+
+  header .header-inner .brand-lockup,
+  header .header-inner .brand-link{
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+
+  header .header-inner .brand-link svg{
+    width:190px !important;
+    height:auto !important;
+    margin:0 auto !important;
+  }
+
+  header .header-inner nav.nav{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    align-items:center !important;
+  }
+
+  header .header-inner nav.nav > a.btn-sm{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:10px 12px !important;
+    font-size:14px !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+    white-space:nowrap !important;
+    box-sizing:border-box !important;
+    min-width:0 !important;
+  }
+
+  header .header-inner nav.nav > .lang-mini{
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:10px !important;
+    margin:0 !important;
+    padding-top:2px !important;
+  }
+
+  header .header-inner nav.nav > .lang-mini .lang-btn{
+    height:34px !important;
+    padding:0 14px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  html, body { overflow-x: hidden; }
+
+  header .header-inner{
+    max-width:100% !important;
+    padding:0 16px !important;
+    gap:12px !important;
+    flex-wrap:nowrap !important;
+  }
+
+  header .header-inner .brand-lockup{
+    flex:0 0 auto !important;
+    min-width:0 !important;
+  }
+
+  header .header-inner .brand-link svg{
+    width:170px !important;
+    height:auto !important;
+  }
+
+  header .header-inner nav.nav{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:8px !important;
+    flex-wrap:nowrap !important;
+    min-width:0 !important;
+    margin-left:auto !important;
+  }
+
+  header .header-inner nav.nav > a.btn-sm{
+    margin:0 !important;
+    padding:10px 14px !important;
+    font-size:13px !important;
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
+  }
+
+  header .header-inner nav.nav > .lang-mini{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+    margin:0 0 0 2px !important;
+    padding:0 !important;
+    flex:0 0 auto !important;
+    white-space:nowrap !important;
+  }
+
+  header .header-inner nav.nav > .lang-mini .lang-btn{
+    height:32px !important;
+    min-width:32px !important;
+    padding:0 11px !important;
+    flex:0 0 auto !important;
+  }
+}
+</style>
+
+<style id="demo-nav-minimal">
+.esikia-demo-nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:12px;padding:10px;border-radius:999px;background:rgba(255,255,255,.96);border:1px solid rgba(16,24,40,.08);box-shadow:0 12px 30px rgba(15,23,42,.14);backdrop-filter:blur(10px)}
+.esikia-demo-nav a{text-decoration:none;color:inherit}
+.esikia-demo-nav .demo-btn{display:inline-flex;align-items:center;justify-content:center;min-width:132px;height:44px;padding:0 18px;border-radius:999px;border:1px solid #dfe7e4;background:#fff;color:#16352f;font-weight:800;font-size:14px;line-height:1;transition:.18s ease}
+.esikia-demo-nav .demo-btn:hover{border-color:rgba(20,184,166,.45);box-shadow:0 6px 18px rgba(20,184,166,.14);transform:translateY(-1px)}
+.esikia-demo-nav .demo-btn.primary{background:linear-gradient(90deg,#1c8c6d,#28a37b);color:#fff;border-color:transparent;box-shadow:0 12px 28px rgba(16,102,77,.22)}
+.esikia-demo-nav .demo-btn.primary:hover{box-shadow:0 14px 34px rgba(20,184,166,.22)}
+@media (max-width:720px){.esikia-demo-nav{left:12px;right:12px;bottom:12px;transform:none;justify-content:center;gap:8px;padding:8px;border-radius:18px}.esikia-demo-nav .demo-btn{min-width:0;flex:1 1 0;padding:0 12px;font-size:13px;height:42px}}
+</style>
+</head>
+<body>
+<header>
+<div class="header-inner">
+<div aria-label="Marque" class="brand-lockup">
+<a class="brand-link" href="index.html" aria-label="Accueil plateforme" data-i18n-attr='{"aria-label": "common.nav.platform_home"}' style="display:block;line-height:0;">
+<svg aria-label="Esikia" height="44" role="img" style="width:240px;height:62px;display:block;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="984 2928 5000 1424" width="170" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<g transform="matrix(2,0,0,2,0,0)"></g>
+<g transform="matrix(1.05469,0,0,1.05469,1637.5,3698.53)"><g transform="matrix(1,0,0,1,-960,-540)"><path d="M1405.79,870.574C1405.44,870.817 1405.2,871.191 1404.85,871.434C1404.67,871.562 1399.84,873.199 1399.4,873.347C1314.82,901.999 1247.97,876.724 1208.5,854.656C1141.08,816.962 1097.94,753.23 1083.58,730.862C1074.99,717.491 1067.68,703.716 1067.7,703.536C1067.73,703.303 1067.87,703.092 1067.9,702.858C1068.13,703.026 1068.45,703.059 1068.68,703.227C1068.69,703.235 1075.31,714.694 1089.4,733.638C1110.64,762.197 1138.3,792.251 1167.33,815.873C1203.64,845.423 1260.67,883.16 1336.36,881.88C1363.08,881.428 1386.37,876.133 1404.33,870.518C1404.39,870.499 1404.45,870.457 1404.52,870.459C1405.16,870.483 1405.15,870.549 1405.79,870.574Z" style="fill:rgb(183,121,65);"></path><path d="M1301.06,816.289C1300.97,816.073 1300.77,815.917 1300.67,815.701C1300.62,815.589 1301.27,812.687 1300.16,806.155C1298.57,796.752 1292.62,781.52 1274.42,766.14C1238.74,735.997 1180.86,722.17 1154.52,716.57C1110.72,707.259 1068.22,703.93 1068.1,703.796L1067.64,703.259C1067.87,703.184 1067.95,702.874 1068.18,702.799C1068.31,702.754 1077.57,703.386 1078.39,703.441C1137.46,707.47 1234.75,719.578 1279.74,763.634C1283.18,767.008 1291.14,775.114 1296.59,786.385C1302.22,798.016 1303.06,809.346 1301.72,815.608C1301.7,815.704 1301.72,815.824 1301.65,815.895C1301.4,816.154 1301.31,816.029 1301.06,816.289Z" style="fill:rgb(183,121,65);"></path><path d="M1065.2,703.751C1073.51,703.434 1091.44,702.837 1097.88,702.734C1122.3,702.346 1129.47,702.359 1132.22,702.365C1142.7,702.384 1157.86,702.287 1203.83,703.887C1262.53,705.93 1302.66,708.613 1322.3,710.044C1377.38,714.059 1427.84,774.357 1399.5,805.31C1389.26,816.5 1364.25,828.389 1301.07,818.538C1292.58,817.214 1261.59,810.936 1112.98,733.915C1103.55,729.024 1074.68,714.049 1035.45,692.867C1033.75,691.951 1033.72,692.006 1032.41,691.178C1031.66,690.703 1023.17,685.348 1023,685.231C1022.17,684.637 1017.67,681.42 1017.67,681.411C1017.58,681.191 1017.55,680.953 1017.47,680.733C1017.73,680.748 1017.98,680.554 1018.25,680.569C1018.3,680.573 1018.3,680.593 1020.96,681.63C1023.72,682.71 1023.73,682.68 1026.44,683.905C1034.27,687.454 1034.29,687.409 1034.96,687.753C1036.54,688.571 1047.91,694.659 1065.2,703.751ZM1067.61,705.014C1130.62,738.1 1265.48,807.431 1301.92,813.059C1358.63,821.82 1394.89,813.767 1400.88,791.029C1408.3,762.859 1366.79,719.31 1321.86,716.085C1245.9,710.635 1179.93,709.262 1159.68,708.615C1148.08,708.244 1148.08,708.263 1136.48,707.847C1126.1,707.475 1126.11,707.457 1115.73,707.029C1102.19,706.47 1102.19,706.549 1088.66,705.922C1079.14,705.481 1071.92,705.184 1067.61,705.014Z" style="fill:rgb(183,121,65);"></path><path d="M999.325,611.352C999.541,611.169 999.614,610.852 999.831,610.67C999.837,610.664 1052.32,593.43 1111.71,557.251C1149.88,534.003 1185.15,506.534 1215.09,473.115C1227.82,458.9 1245.23,437.536 1259.19,410.642C1259.38,410.264 1267.81,395.069 1274.82,373.784C1276.09,369.926 1276.95,366.915 1276.95,366.907C1277.12,366.736 1277.39,366.701 1277.55,366.531C1277.63,366.756 1277.86,366.907 1277.93,367.132C1277.93,367.133 1277.48,369.882 1276.81,373.245C1276.03,377.191 1273.17,392.081 1264.95,412.233C1264.57,413.156 1260.48,423.019 1254.96,433.113C1238.15,463.827 1212.82,495.489 1166.52,529.624C1145.17,545.357 1123.32,557.826 1119.42,560.049C1105.97,567.722 1073.81,585.442 1028.88,602.046C1013.8,607.62 1000.29,611.65 1000.13,611.633C999.846,611.605 999.607,611.38 999.325,611.352Z" style="fill:rgb(183,121,65);"></path><path d="M1450.17,214.52C1450.18,214.847 1450.35,215.154 1450.37,215.481C1450.37,215.495 1449.76,217.337 1449.12,218.971C1434.98,254.932 1387.48,291.601 1351.81,315.79C1312.13,342.705 1271.72,363.689 1267.56,365.881C1264.4,367.549 1223.52,389.434 1162.05,416.49C1120.34,434.85 1075.53,452.827 1047.06,463.371L1046,463.763C1045.64,463.895 1045.7,463.631 1045.35,463.478C1045.53,463.324 1045.45,462.985 1045.63,462.831C1045.65,462.821 1046.75,462.383 1051.97,460.195C1052.45,459.993 1100.02,440.156 1156.67,413.147C1175.27,404.277 1244.74,371.368 1316.92,329.275C1372.73,296.729 1398.68,274.708 1405.34,269.081C1416.93,259.285 1440.36,238.241 1449.17,215.752C1449.39,215.189 1449.38,215.182 1449.41,215.141C1449.72,214.757 1449.86,214.906 1450.17,214.52Z" style="fill:rgb(183,121,65);"></path><path d="M1320.65,123.73C1320.78,123.928 1321.07,123.984 1321.2,124.182C1321.2,124.187 1323.42,142.827 1315.05,176.394C1300.63,234.207 1268.06,285.58 1254.25,306.443C1232.12,339.88 1197.23,369.09 1183.05,380.659C1179.64,383.441 1161.26,398.44 1138.86,413.397C1132.63,417.552 1127.3,420.857 1126.28,421.486C1115.72,428.025 1111.27,430.582 1109.94,431.342C1097.52,438.465 1092.55,441.108 1081.57,446.843C1081.49,446.88 1072.52,451.397 1060.61,457.107C1059.47,457.649 1056.28,459.178 1046.35,463.608C1046.25,463.65 1046.16,463.741 1046.06,463.734C1045.7,463.709 1045.74,463.566 1045.38,463.541C1045.48,463.179 1045.26,463.075 1045.57,462.861C1046.05,462.528 1049.79,459.975 1054.36,456.796C1059.39,453.302 1064.22,450.172 1075.79,442.102C1077.04,441.228 1077.05,441.24 1091.51,431.289L1112.19,417.096C1112.51,416.873 1141.55,396.744 1150.94,390.009C1175.49,372.405 1217.86,340.897 1244.74,304.908C1245.78,303.512 1257.46,287.701 1269.97,267.201C1278.44,253.316 1309.32,202.173 1318.21,148.827C1320.2,136.872 1320.37,128.737 1320.24,125.051C1320.21,124.335 1320.17,124.332 1320.2,124.275C1320.29,124.059 1320.56,123.946 1320.65,123.73Z" style="fill:rgb(183,121,65);"></path><path d="M1045.53,462.888L1046.1,463.706C1028.83,477.953 1002.8,500.713 984.367,528.435C967.047,554.482 965.091,573.07 964.574,580.674C964.399,583.251 963.597,593.755 967.934,607.212C969.852,613.165 972.365,618.358 974.017,621.624C974.244,622.073 975.082,623.732 977.002,627.167C977.247,627.606 977.479,628.021 980.183,632.592C982.999,637.35 984.714,639.498 987.102,642.979C990.011,647.219 991.339,648.719 994.626,652.971C997.874,657.172 998.311,657.422 1001.81,661.687C1007.36,668.45 1011.28,672.127 1013.64,674.645C1017.07,678.302 1019.53,680.517 1019.53,680.528C1019.63,680.743 1019.65,680.987 1019.75,681.202C1019.47,681.223 1019.21,681.366 1018.94,681.386C1018.87,681.391 1012.22,679.717 1008.43,678.24C1000.83,675.277 995.001,672.329 992.488,671.032C991.616,670.581 984.53,666.438 980.383,663.3C976.68,660.497 972.176,656.77 969.966,654.57C965.652,650.274 961.635,645.643 959.632,642.899C955.934,637.834 947.592,625.98 944.202,606.771C941.844,593.405 943.729,581.076 944.066,578.87C948.15,552.159 964.513,531.346 970.232,524.302C980.495,511.663 1001.78,489.124 1045.53,462.888Z" style="fill:rgb(183,121,65);"></path><path d="M924.26,686.73C924.882,686.391 925.388,686.252 925.549,686.207C927.236,685.742 927.262,685.93 928.996,686.157C937.661,687.291 938.97,687.825 940.285,688.864C940.617,689.127 942.606,690.7 942.656,693.594C942.683,695.097 942.15,696.208 942.05,696.417C941.929,696.669 941.292,697.686 941.215,697.772C938.962,700.266 936.103,700.09 933.345,699.924C916.768,698.927 834.026,687.61 788.682,654.667C747.176,624.512 718.395,592.426 702.57,573.26C696.709,566.163 692.906,561.021 692.1,559.931C689.046,555.802 687.404,553.574 682.694,546.399C680.584,543.184 674.011,532.036 672.358,528.815C667.098,518.569 664.444,512.266 664.447,512.243C664.475,512.009 664.613,511.797 664.641,511.563C664.855,511.661 665.107,511.659 665.321,511.757C665.342,511.767 669.15,517.131 676.589,526.013C678.499,528.293 681.148,531.893 688.483,540.49C689.101,541.215 690.796,543.37 694.794,548.109C696.04,549.585 697.25,551.174 701.694,556.449C707.21,562.996 723.751,583.614 749.533,607.666C758.597,616.122 774.072,630.04 795.411,645.325C832.158,671.645 896.98,683.454 924.26,686.73Z" style="fill:rgb(183,121,65);"></path><path d="M928.669,700.215C927.211,692.248 927.19,692.246 927.209,692.135C927.335,691.424 927.93,690.883 928.288,690.257C928.527,689.839 928.522,689.839 931.24,685.009C944.123,688.503 949.49,689.215 960.214,690.032C963.637,690.292 965.454,690.449 973.063,690.552C973.694,690.56 979.877,690.418 981.716,690.304C1057.69,685.619 1152.47,659.136 1221.44,612.33C1259.06,586.806 1292.61,552.977 1293.47,552.124C1339.86,506.426 1371.11,462.143 1384.32,443.007C1421.03,389.829 1438.28,349.927 1441.63,342.291C1441.93,341.596 1443.03,338.923 1443.03,338.923C1443.32,338.765 1443.66,339.458 1443.95,339.3C1437.92,353.983 1422.39,394.493 1384.07,451.302C1383.1,452.741 1370.24,471.777 1352.94,493.541C1308.64,549.266 1264.75,588.39 1230.66,612.816C1154.81,667.163 1052.2,692.441 982.226,697.751C980.733,697.864 978.939,698.073 974.398,698.43C972.51,698.579 970.987,698.796 965.855,699.232C962.536,699.514 956.799,700.284 948.543,700.631C941.316,700.935 935.963,700.725 928.669,700.215Z" style="fill:rgb(183,121,65);"></path><path d="M1309.61,932.873C1274.78,938.543 1229.01,936.299 1177.72,896.621C1135.87,864.252 1108.57,821.538 1089.98,806.491C1035.45,762.343 930.544,758.556 893.361,754.513C871.781,752.167 815.459,744.855 776.237,718.553C747.099,699.012 740.044,678.67 737.667,674.851C737.035,673.836 730.048,665.123 720.684,646.811C718.546,642.629 710.58,628.976 695.564,590.701C684.468,562.418 676.78,540.445 669.567,530.584C660.819,518.623 649.483,510.826 635.944,505.838C633.853,505.068 622.616,499.042 601.677,497.115C601.618,497.109 587.132,495.31 571.201,497.183C571.04,497.202 570.089,497.314 569.198,497.444C569.043,497.467 568.884,497.554 568.732,497.514C568.382,497.421 568.468,497.251 568.121,497.159C568.293,496.996 568.308,496.709 568.479,496.546C568.479,496.546 581.116,491.849 598.732,489.971C603.646,489.447 617.118,488.436 632.104,491.293C635.988,492.034 638.879,492.828 639.947,493.124C640.104,493.167 643.496,494.315 647.585,496.268C650.24,497.537 667.726,505.496 679.948,524.745C692.784,544.96 704.041,598.645 725.799,643.38C725.967,643.725 730.297,652.29 735.715,660.706C740.51,668.154 742.62,670.346 743.642,672.166C746.7,677.606 754.719,697.649 786.724,716.39C801.735,725.18 834.735,742.43 903.781,749.275C948.322,753.69 1042.54,761.381 1093.16,803.84C1125.74,831.166 1186.94,947.862 1305.22,932.489C1307.53,932.188 1309.45,931.885 1309.45,931.885C1309.69,932.123 1309.38,932.636 1309.61,932.873Z" style="fill:rgb(183,121,65);"></path><path d="M858.161,515.899C857.486,515.105 856.712,514.472 855.826,514.043C855.775,514.018 839.744,507.907 816.374,496.544C778.957,478.352 767.006,468.254 762.795,465.108C741.192,448.97 709.655,428.181 671.489,431.478C656.375,432.783 642.373,438.869 628.041,447.329C628.027,447.337 622.568,450.61 619.407,452.674C617.691,453.795 617.662,453.752 609.752,459.43C608.92,460.028 606.604,461.577 598.073,468.534C595.462,470.664 595.466,470.665 588.641,476.723C582.169,482.466 578.512,486.53 574.377,491.042C571.06,494.661 569.075,497.254 569.044,497.269C568.83,497.369 568.579,497.37 568.366,497.47C568.38,497.163 568.227,496.863 568.241,496.556C568.251,496.324 569.493,493.034 569.608,492.73C571.119,488.723 572.389,485.713 575.459,479.998C579.822,471.878 582.951,467.465 583.686,466.43C588.406,459.772 591.567,456.16 592.309,455.314C598.383,448.374 602.242,444.882 603.17,444.042C612.246,435.829 618.303,432.018 618.333,431.998C645.121,413.985 669.44,414.146 671.551,414.088C711.915,412.985 742.96,433.883 765.392,452.535C773.521,459.294 777.245,463.321 792.567,473.603C814.15,488.088 842.518,503.45 856.826,510.195C857.368,510.45 857.875,510.747 858.35,511.08C858.512,507.17 858.706,502.918 858.928,498.917C859.581,487.149 860.203,480.131 861.552,470.197C862.495,463.246 864.087,452.338 867.981,438.386C869.73,432.115 872.557,422.714 878.268,410.951C884.848,397.399 894.437,382.43 911.034,368.656C911.364,368.382 919.851,361.457 932.087,352.193C953.244,336.174 974.055,322.464 977.79,320.003C998.122,306.609 1017.63,294.925 1028.51,290.033C1054.49,278.34 1160.94,228.775 1182.32,219.576C1193.41,214.804 1325.71,152.914 1370.2,40.997C1370.46,40.346 1370.45,40.337 1370.46,40.333C1370.98,40.196 1370.88,40.819 1371.4,40.681C1363.83,62.12 1341.42,118.254 1264.6,179.129C1229.72,206.77 1197.25,224.429 1185.85,229.708C1175.55,234.479 1073.95,285.507 1039.82,302.245C1035.85,304.192 1028.95,306.948 1007.39,320.949C967.719,346.719 926.031,379.877 918.605,386.575C897.733,405.402 888.383,428.434 885.987,433.929C883.14,440.459 879.826,448.972 875.482,464.477C874.388,468.383 873.026,473.195 869.354,489.924C867.044,500.453 865.403,509.437 863.576,519.52C866.194,529.566 863.017,543.638 861.196,546.418C860.107,548.082 859.186,546.641 859.211,546.507C859.215,546.489 859.218,546.471 859.223,546.453C859.208,546.446 859.194,546.439 859.18,546.432C859.163,546.424 858.679,545.593 858.345,542.838C857.752,537.937 857.758,530.829 857.827,525.721C857.827,525.721 857.946,521.599 858.161,515.899ZM860.094,546.052C861.411,544.112 862.647,535.848 862.012,528.122C861.987,528.26 861.962,528.398 861.936,528.537C859.028,544.393 860.14,545.936 860.099,546.038C860.098,546.043 860.096,546.047 860.094,546.052Z" style="fill:rgb(183,121,65);"></path></g></g>
+<g transform="matrix(4,0,0,4,1332.98,556.892)"><g transform="matrix(1,0,0,1.14122,5.68434e-14,-125.309)"><path d="M270.875,883.831C261.341,883.817 252.211,879.982 245.526,873.184C238.841,866.387 235.16,857.194 235.306,847.661C235.855,811.626 236.694,756.673 237.233,721.329C237.522,702.36 252.982,687.134 271.953,687.134L356.87,687.134C369.699,687.134 380.1,697.535 380.1,710.364L380.1,710.366L263.806,710.366L263.806,770.661L361.166,770.661C364.228,770.661 367.166,771.878 369.331,774.044C371.497,776.209 372.714,779.147 372.714,782.209L372.714,782.211C372.714,785.273 371.497,788.211 369.331,790.376C367.166,792.542 364.228,793.759 361.166,793.759L263.806,793.759L263.806,860.768L384.665,860.768L384.665,860.769C384.665,866.927 382.217,872.833 377.859,877.184C373.502,881.535 367.593,883.975 361.435,883.965C337.241,883.929 299.013,883.873 270.875,883.831Z" style="fill:rgb(11,110,107);fill-rule:nonzero;"></path></g><g transform="matrix(1,0,0,1.14122,5.68434e-14,-125.309)"><path d="M411.791,820.751C411.791,820.751 413.197,820.628 415.336,820.441C426.17,819.494 436.381,825.631 440.628,835.642C441.729,838.254 443.017,840.654 444.49,842.841C448.743,849.152 455.345,854.255 464.298,858.15C473.25,862.044 483.322,863.991 494.513,863.991C504.45,863.991 513.223,862.514 520.833,859.56C528.443,856.605 534.105,852.554 537.82,847.407C541.536,842.259 543.393,836.641 543.393,830.554C543.393,824.376 541.603,818.982 538.022,814.372C534.441,809.761 528.532,805.889 520.296,802.756C515.014,800.697 503.331,797.496 485.247,793.154C467.163,788.812 454.495,784.717 447.243,780.867C437.843,775.943 430.838,769.833 426.227,762.537C421.617,755.241 419.312,747.071 419.312,738.029C419.312,728.092 422.132,718.804 427.772,710.165C433.412,701.525 441.648,694.968 452.481,690.491C463.313,686.015 475.354,683.777 488.604,683.777C503.197,683.777 516.066,686.127 527.212,690.827C538.358,695.527 546.93,702.443 552.928,711.575C558.926,720.706 562.149,731.046 562.596,742.595C562.596,742.595 560.693,742.738 557.936,742.946C547.552,743.727 537.763,738.015 533.335,728.59C531.13,723.647 527.986,719.555 523.989,716.275C516.245,709.918 504.808,706.74 489.678,706.74C473.922,706.74 462.44,709.627 455.233,715.402C448.027,721.176 444.423,728.137 444.423,736.284C444.423,743.356 446.975,749.175 452.078,753.741C457.091,758.307 470.184,762.984 491.357,767.774C512.53,772.564 527.055,776.749 534.933,780.33C546.392,785.612 554.853,792.304 560.314,800.406C565.775,808.508 568.505,817.841 568.505,828.405C568.505,838.879 565.506,848.749 559.508,858.015C553.51,867.281 544.893,874.488 533.657,879.636C522.422,884.783 509.777,887.357 495.721,887.357C477.906,887.357 462.977,884.761 450.936,879.569C438.895,874.376 429.45,866.565 422.602,856.135C415.753,845.706 412.15,833.911 411.791,820.751Z" style="fill:rgb(11,110,107);fill-rule:nonzero;"></path></g><g transform="matrix(1,0,0,1.14122,5.68434e-14,-125.309)"><path d="M608.523,884L608.523,713.184C608.523,706.275 611.267,699.649 616.153,694.764C621.038,689.879 627.664,687.134 634.573,687.134L634.575,687.134L634.575,884L608.523,884Z" style="fill:rgb(11,110,107);fill-rule:nonzero;"></path></g><g transform="matrix(1,0,0,1.14122,5.68434e-14,-125.309)"><path d="M679.427,884L679.427,687.134L705.479,687.134L705.479,784.761L803.24,687.134L838.558,687.134L755.971,766.901L842.183,884L807.806,884C807.806,884 783.575,849.557 763.606,821.172C757.142,811.984 746.974,806.093 735.788,805.055C724.602,804.018 713.524,807.938 705.48,815.78C705.479,815.781 705.479,815.782 705.479,815.782L705.479,884L679.427,884Z" style="fill:rgb(11,110,107);fill-rule:nonzero;"></path></g><g transform="matrix(1,0,0,1.14122,5.68434e-14,-125.309)"><path d="M868.369,884L868.369,713.184C868.369,706.275 871.114,699.649 875.999,694.764C880.885,689.879 887.511,687.134 894.419,687.134L894.421,687.134L894.421,884L868.369,884Z" style="fill:rgb(11,110,107);fill-rule:nonzero;"></path></g><g transform="matrix(1,0,0,1.14122,5.68434e-14,-125.309)"><path d="M946.389,884C940.128,884 934.269,880.917 930.723,875.757C927.177,870.597 926.4,864.022 928.644,858.177C943.925,818.388 972.9,742.939 986.68,707.056C991.289,695.055 1002.82,687.134 1015.67,687.134L1017.63,687.134C1020.51,687.134 1023.11,688.877 1024.2,691.545C1036.12,720.655 1102.97,884 1102.97,884L1073.29,884L1050.33,824.376L968.011,824.376L946.391,884L946.389,884ZM975.531,803.159L1042.27,803.159L1021.73,748.638C1015.46,732.076 1010.8,718.468 1007.76,707.815C1005.25,720.438 1001.72,732.971 997.151,745.415L975.531,803.159Z" style="fill:rgb(11,110,107);fill-rule:nonzero;"></path></g></g>
+</svg>
+</a>
+</div>
+<nav class="nav" style="display:flex;align-items:center;gap:12px;">
+<a class="btn-sm" data-i18n="common.nav.platform_home" href="index.html" style="margin-left:0;">Accueil plateforme</a>
+<a class="btn-sm" data-i18n="common.nav.account" href="espace_personnel.html" style="margin-left:0;">Espace personnel</a>
+<div aria-label="Langue" class="lang-mini" data-i18n-attr='{"aria-label": "common.lang.aria_label"}'>
+<button aria-pressed="true" class="lang-btn is-active esikia-btn" data-lang="fr" id="langFR" type="button">FR</button>
+<span class="sep">|</span>
+<button aria-pressed="false" class="lang-btn esikia-btn" data-lang="en" id="langEN" type="button">EN</button>
+</div>
+</nav>
+</div>
+</header>
+<main class="container">
+<!-- BLOC 1 — Carrousel retraites -->
+<section class="block" id="carrousel">
+<div class="carousel-wrap">
+<div>
+<p class="carousel-title" data-i18n="page.retraits.carousel.title">Vos retraites à venir</p>
+<p class="sub" data-i18n-html="page.retraits.carousel.subtitle_html" style="margin:6px 0 0">Chaque retraite est organisée par ce lieu d’accueil.<span style="display:block;margin-top:6px;"></span>Découvrez les retraites actuellement ouvertes à l’inscription et choisissez celle qui correspond à votre cheminement.</p>
+</div>
+</div>
+<div class="carousel-shell">
+<div class="carousel-fade-left"></div>
+<div class="carousel-fade-right"></div>
+<button aria-label="Voir les retraites précédentes" class="carousel-nav-btn carousel-prev esikia-btn" data-i18n-attr='{"aria-label": "page.retraits.carousel.aria_prev"}' type="button">‹</button>
+<button aria-label="Voir les retraites suivantes" class="carousel-nav-btn carousel-next esikia-btn" data-i18n-attr='{"aria-label": "page.retraits.carousel.aria_next"}' type="button">›</button>
+<div aria-label="Carrousel de retraites" class="carousel" data-i18n-attr='{"aria-label": "page.retraits.carousel.aria_carousel"}'>
+<article class="slide is-active" data-desc="Un temps de silence et de prière, vécu simplement, dans un cadre paisible. Le rythme est accessible, avec des temps libres pour se reposer ou marcher. Cette retraite convient aussi si vous n’avez jamais vécu de retraite auparavant." data-img="" data-img-key="A" data-kpi1="3 jours" data-kpi2="JJ/MM → JJ/MM" data-kpi3="Places limitées" data-kpi4="Hébergement" data-meta="3 jours • JJ/MM → JJ/MM • Places limitées" data-signal="warn" data-subtitle="Un temps simple pour se poser et respirer." data-theme="Silence" data-title="Silence &amp; prière" role="button" tabindex="0">
+<span class="badge-selected" data-i18n="common.badge.selection">Sélection</span>
+<div class="slide-img" data-media="dynamic" style="background-image:none"></div>
+<div class="slide-body">
+<p class="slide-title">Silence &amp; prière</p>
+<p class="slide-meta">3 jours • JJ/MM → JJ/MM • Places limitées</p>
+<div class="slide-actions">
+<a class="btn-solid choose-btn esikia-btn" data-i18n="common.cta.select" href="#focus">Sélectionner</a>
+</div>
+</div>
+</article>
+<article class="slide" data-desc="Lecture priante et temps de silence guidés, sans pression. Vous avancez à un rythme stable, avec des repères simples et du temps personnel. Convient aussi pour une première retraite." data-img="" data-img-key="B" data-kpi1="4 jours" data-kpi2="JJ/MM → JJ/MM" data-kpi3="Hébergement" data-kpi4="Lectio" data-meta="4 jours • JJ/MM → JJ/MM • Hébergement sur place" data-subtitle="Lire, prier, avancer à votre rythme." data-theme="Lectio" data-title="Lectio divina" role="button" tabindex="0">
+<span class="badge-selected" data-i18n="common.badge.selection">Sélection</span>
+<div class="slide-img" data-media="dynamic" style="background-image:none"></div>
+<div class="slide-body">
+<p class="slide-title">Lectio divina</p>
+<p class="slide-meta">4 jours • JJ/MM → JJ/MM • Hébergement sur place</p>
+<div class="slide-actions">
+<a class="btn-solid choose-btn esikia-btn" data-i18n="common.cta.select" href="#focus">Sélectionner</a>
+</div>
+</div>
+</article>
+<article class="slide" data-desc="Un format court et accessible pour souffler : temps calmes, repères simples et accueil fraternel. Idéal pour faire une pause sans se compliquer la vie. Convient aussi aux débutants." data-img="" data-img-key="C" data-kpi1="2 jours" data-kpi2="Week-end" data-kpi3="Débutants" data-kpi4="Paix" data-meta="2 jours • JJ/MM → JJ/MM • Débutants bienvenus" data-subtitle="Un week-end court pour souffler." data-theme="Week-end" data-title="Paix intérieure (week-end)" role="button" tabindex="0">
+<span class="badge-selected" data-i18n="common.badge.selection">Sélection</span>
+<div class="slide-img" data-media="dynamic" style="background-image:none"></div>
+<div class="slide-body">
+<p class="slide-title">Paix intérieure (week-end)</p>
+<p class="slide-meta">2 jours • JJ/MM → JJ/MM • Débutants bienvenus</p>
+<div class="slide-actions">
+<a class="btn-solid choose-btn esikia-btn" data-i18n="common.cta.select" href="#focus">Sélectionner</a>
+</div>
+</div>
+</article>
+<article class="slide" data-desc="Un vrai temps long pour se poser : silence, prière, marche, et repères simples. Vous gardez de l’espace pour avancer à votre rythme, sans obligation. Accompagnement possible selon disponibilité." data-img="" data-img-key="D" data-kpi1="7 jours" data-kpi2="Accompagnement" data-kpi3="Temps long" data-kpi4="Désert" data-meta="7 jours • JJ/MM → JJ/MM • Accompagnement" data-subtitle="Un temps long, stable, sans pression." data-theme="Accompagnement" data-title="Chemin de désert" role="button" tabindex="0">
+<span class="badge-selected" data-i18n="common.badge.selection">Sélection</span>
+<div class="slide-img" data-media="dynamic" style="background-image:none"></div>
+<div class="slide-body">
+<p class="slide-title">Chemin de désert</p>
+<p class="slide-meta">7 jours • JJ/MM → JJ/MM • Accompagnement</p>
+<div class="slide-actions">
+<a class="btn-solid choose-btn esikia-btn" data-i18n="common.cta.select" href="#focus">Sélectionner</a>
+</div>
+</div>
+</article>
+<article class="slide" data-desc="Un cadre paisible pour prendre du recul et clarifier ce qui vous habite. Temps de prière proposés, relecture, et entretiens possibles selon disponibilité. Aucun niveau n’est requis." data-img="" data-img-key="A" data-kpi1="3 jours" data-kpi2="Entretiens" data-kpi3="Discernement" data-kpi4="Clarté" data-meta="3 jours • JJ/MM → JJ/MM • Entretiens possibles" data-subtitle="Un cadre calme pour y voir plus clair." data-theme="Discernement" data-title="Temps de discernement" role="button" tabindex="0">
+<span class="badge-selected" data-i18n="common.badge.selection">Sélection</span>
+<div class="slide-img" data-media="dynamic" style="background-image:none"></div>
+<div class="slide-body">
+<p class="slide-title">Temps de discernement</p>
+<p class="slide-meta">3 jours • JJ/MM → JJ/MM • Entretiens possibles</p>
+<div class="slide-actions">
+<a class="btn-solid choose-btn esikia-btn" data-i18n="common.cta.select" href="#focus">Sélectionner</a>
+</div>
+</div>
+</article>
+<article class="slide" data-desc="Une immersion dans un rythme simple : offices proposés, travail, repas, silence. Un cadre stable pour se recentrer, sans performance attendue. Convient si vous cherchez du concret et du calme." data-img="" data-img-key="B" data-kpi1="5 jours" data-kpi2="Rythme" data-kpi3="Travail" data-kpi4="Prière" data-meta="5 jours • JJ/MM → JJ/MM • Rythme monastique" data-subtitle="Un rythme simple pour se remettre d’aplomb." data-theme="Monastique" data-title="Prière &amp; travail" role="button" tabindex="0">
+<span class="badge-selected" data-i18n="common.badge.selection">Sélection</span>
+<div class="slide-img" data-media="dynamic" style="background-image:none"></div>
+<div class="slide-body">
+<p class="slide-title">Prière &amp; travail</p>
+<p class="slide-meta">5 jours • JJ/MM → JJ/MM • Rythme monastique</p>
+<div class="slide-actions">
+<a class="btn-solid choose-btn esikia-btn" data-i18n="common.cta.select" href="#focus">Sélectionner</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+<div class="jump-row">
+<div class="minihint"></div>
+</div>
+</section>
+<!-- BLOC 2 — Focus -->
+<section class="block" id="focus">
+<div class="focus-head">
+<div>
+<h2 data-i18n="page.retraits.focus.pitch_title" style="margin-bottom:6px"><span class="section-title">Votre retraite</span></h2>
+<p class="sub" style="margin:0"></p>
+</div>
+<div class="focus-status" id="focusStatus"><span data-i18n="page.retraits.focus.current_selection">Sélection actuelle :</span> <span id="focusTheme">Silence</span></div>
+</div>
+<div class="focus">
+<div class="focus-card">
+<h3 class="focus-title" id="focusTitle">Silence &amp; prière</h3>
+<p class="focus-sub" id="focusSub">Un temps simple pour se poser et respirer.</p>
+<div class="kpis">
+<span class="pill ok" id="kpi1">3 jours</span>
+<span class="pill ok" id="kpi2">JJ/MM → JJ/MM</span>
+<span class="pill ok" id="kpi3">Places limitées</span>
+<span class="pill ok" id="kpi4">Hébergement</span>
+</div>
+<p class="focus-text" id="focusDesc">Un temps de silence et de prière, vécu simplement, dans un cadre paisible. Le rythme est accessible, avec des temps libres pour se reposer ou marcher. Cette retraite convient aussi si vous n’avez jamais vécu de retraite auparavant.</p>
+<div aria-label="Cadre de la retraite" class="focus-frame" data-i18n-attr='{"aria-label": "page.retraits.focus.aria_frame"}'>
+<p class="focus-frame-title" data-i18n="page.retraits.focus.expectations.title">Ce qui vous attend pendant la retraite</p>
+<ul>
+<li data-i18n="page.retraits.focus.expectations.item_1">Accueil simple et discret à votre arrivée</li>
+<li data-i18n="page.retraits.focus.expectations.item_2">Hébergement sur place, dans un cadre calme</li>
+<li data-i18n="page.retraits.focus.expectations.item_3">Temps de prière proposés chaque jour, sans obligation</li>
+<li data-i18n="page.retraits.focus.expectations.item_4">Repas pris en commun, dans la simplicité</li>
+<li data-i18n="page.retraits.focus.expectations.item_5">Temps libres quotidiens (repos, marche, lecture)</li>
+<li data-i18n="page.retraits.focus.expectations.item_6">Possibilité d’échanger si besoin, sans démarche imposée</li>
+</ul>
+</div>
+<div class="focus-cta">
+<a class="btn-solid esikia-btn" data-i18n="page.retraits.focus.cta_reserve" href="#" id="focusReserve"><span aria-hidden="true" class="reserve-dot"></span>Je réserve ma place</a>
+</div>
+</div>
+<div aria-label="Visuel de la retraite" class="focus-visual" data-i18n-attr='{"aria-label": "page.retraits.focus.aria_visual"}' id="focusVisual"></div>
+</div>
+</section>
+<!-- BLOC 3 -->
+<section class="block merged">
+<h2 data-i18n="page.retraits.trust_flow.title">Déroulé &amp; cadre de confiance</h2>
+<p class="sub" data-i18n="page.retraits.trust_flow.subtitle">Un chemin simple, encadré et respectueux, du choix jusqu’à l’accueil.</p>
+<div class="merged-wrap v2">
+<div class="merged-part">
+<h3 data-i18n="page.retraits.trust_flow.how_title">Comment se déroule une réservation</h3>
+<div class="steps v2" role="list">
+<div class="step-card" role="listitem">
+<div class="step-head">
+<span class="step-n">1</span>
+<div class="step-title" data-i18n="page.retraits.trust_flow.step1.title">Vous choisissez</div>
+</div>
+<div class="step-desc" data-i18n="page.retraits.trust_flow.step1.desc">Une retraite qui correspond à votre cheminement.</div>
+</div>
+<div class="step-card" role="listitem">
+<div class="step-head">
+<span class="step-n">2</span>
+<div class="step-title" data-i18n="page.retraits.trust_flow.step2.title">Vous réservez sereinement</div>
+</div>
+<div class="step-desc" data-i18n="page.retraits.trust_flow.step2.desc">Réservation simple et paiement sécurisé sur la plateforme.</div>
+</div>
+<div class="step-card" role="listitem">
+<div class="step-head">
+<span class="step-n">3</span>
+<div class="step-title" data-i18n="page.retraits.trust_flow.step3.title">Le lieu vous accueille</div>
+</div>
+<div class="step-desc" data-i18n="page.retraits.trust_flow.step3.desc">Vous êtes attendu et accompagné selon le cadre proposé.</div>
+</div>
+</div>
+</div>
+<div class="merged-part">
+<h3 data-i18n="page.retraits.trust_flow.framework_title">Un cadre clair et respectueux</h3>
+<div class="reassurance v2" role="list">
+<div class="trust-card" role="listitem">
+<div class="trust-head">
+<span aria-hidden="true" class="trust-dot"></span>
+<div class="trust-title" data-i18n="page.retraits.trust_flow.card1.title">Paiement sécurisé</div>
+</div>
+<div class="trust-desc" data-i18n="page.retraits.trust_flow.card1.desc">Réservation fiable et confirmée.</div>
+</div>
+<div class="trust-card" role="listitem">
+<div class="trust-head">
+<span aria-hidden="true" class="trust-dot"></span>
+<div class="trust-title" data-i18n="page.retraits.trust_flow.card2.title">Des lieux engagés, certifiés Esikia</div>
+</div>
+<div class="trust-desc" data-i18n="page.retraits.trust_flow.card2.desc">Une charte simple, assumée, et un cadre transparent.</div>
+</div>
+<div class="trust-card" role="listitem">
+<div class="trust-head">
+<span aria-hidden="true" class="trust-dot"></span>
+<div class="trust-title" data-i18n="page.retraits.trust_flow.card3.title">Accompagnement humain</div>
+</div>
+<div class="trust-desc" data-i18n="page.retraits.trust_flow.card3.desc">Un contact possible si besoin, sans démarche imposée.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BLOC 5 -->
+<section class="block cta-final">
+<h2 data-i18n="page.retraits.cta_final.title">Soutenir le lieu par un temps de retraite</h2>
+<a class="btn esikia-btn" data-i18n="page.retraits.focus.cta_view_retraits" href="#carrousel">Voir les retraites</a>
+</section>
+</main>
+<script>
+
+(function(){
+
+  // --- Dynamic images injection (no hardcoded images in HTML/CSS) ---
+  var IMAGE_MAP = {
+    "A": "./assets/img/img_01_133e4674065a.png",
+    "B": "./assets/img/img_02_64107e372919.png",
+    "C": "./assets/img/img_03_d8b7e9d05fc2.png",
+    "D": "./assets/img/img_04_5823a7b2de2d.png"
+  };
+  try {
+    // Injecte l'URL image sur la slide + applique le visuel dans la card (sans hardcode HTML/CSS)
+    var slidesForImg = document.querySelectorAll('.slide[data-img-key]');
+    slidesForImg.forEach(function(slide){
+      var k = slide.getAttribute('data-img-key') || '';
+      var url = IMAGE_MAP[k] || '';
+      if(url){
+        // Source logique (utilisée par le focus / sélection)
+        slide.dataset.img = url;
+
+        // Visuel de la card (miniature)
+        var thumb = slide.querySelector('.slide-img');
+        if(thumb){
+          thumb.style.backgroundImage = "url('"+url+"')";
+          thumb.style.backgroundSize = 'cover';
+          thumb.style.backgroundPosition = 'center';
+          thumb.style.backgroundRepeat = 'no-repeat';
+        }
+      }
+    });
+  } catch(e) {}
+  // ---------------------------------------------------------------
+
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const focusTitle = document.getElementById('focusTitle');
+  const focusDesc  = document.getElementById('focusDesc');
+  const focusSub   = document.getElementById('focusSub');
+  const focusTheme = document.getElementById('focusTheme');
+  const k1 = document.getElementById('kpi1');
+  const k2 = document.getElementById('kpi2');
+  const k3 = document.getElementById('kpi3');
+  const k4 = document.getElementById('kpi4');
+  const focusReserve = document.getElementById('focusReserve');
+  const focusVisual = document.getElementById('focusVisual');
+  function setActive(slide, opts){
+    slides.forEach(s => s.classList.remove('is-active'));
+    slide.classList.add('is-active');
+
+    focusTitle.textContent = slide.dataset.title || '';
+    if(focusSub){ focusSub.textContent = slide.dataset.subtitle || ''; }
+
+    focusDesc.textContent  = slide.dataset.desc  || '';
+    focusTheme.textContent = slide.dataset.title || 'Sélection';
+
+    k1.textContent = slide.dataset.kpi1 || '';
+    k2.textContent = slide.dataset.kpi2 || '';
+    k3.textContent = slide.dataset.kpi3 || '';
+    
+    // Visuel (zone verte) : photo liée à la card
+    if(focusVisual){
+      const img = (opts && opts.user) ? (slide.dataset.img || '') : '';
+      if(img){
+        focusVisual.style.backgroundImage = "url('"+img+"')";
+        focusVisual.style.backgroundSize = 'cover';
+        focusVisual.style.backgroundPosition = 'center';
+        focusVisual.style.backgroundRepeat = 'no-repeat';
+      }
+      else {
+        focusVisual.style.backgroundImage = 'none';
+      }
+    }
+
+    
+
+    // Capsule warning (style Admin Hôte) : uniquement quand c'est un vrai signal (ex: places limitées)
+    const signal = ((slide.dataset && slide.dataset.signal) ? slide.dataset.signal : '').toLowerCase();
+    const k3Val = (k3.textContent || '').toLowerCase();
+
+    // Signal prioritaire (ne dépend pas de la langue)
+    // - warn : places limitées / complet / fermé / etc.
+    // Fallback : détection par mots-clés FR/EN sur le texte affiché
+    const isWarn =
+      (signal === 'warn') ||
+      k3Val.includes('places limitées') || k3Val.includes('complet') || k3Val.includes('fermé') ||
+      k3Val.includes('limited') || k3Val.includes('full') || k3Val.includes('closed');
+
+    k3.classList.toggle('warn', isWarn);
+    k3.classList.toggle('ok', !isWarn);
+k4.textContent = slide.dataset.kpi4 || '';
+
+    // Liens "fake" (maquette) : on injecte un hash pour montrer que c'est bien piloté
+    const slug = (slide.dataset.title || 'retraite')
+      .toLowerCase()
+      .replace(/[’'"]/g,'')
+      .replace(/[^a-z0-9]+/g,'-')
+      .replace(/^-|-$/g,'');
+
+    focusReserve.setAttribute('href', '#paiement-'+slug);
+    if(opts && opts.scroll){
+      document.getElementById('focus').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  // Clic sur slide (ou bouton Choisir) => update + scroll focus
+  slides.forEach(slide => {
+    slide.addEventListener('click', (e)=>{
+      setActive(slide, {scroll: true, user: true});
+    });
+
+    slide.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        setActive(slide, {scroll: true, user: true});
+      }
+    });
+
+    // Bouton Choisir (pour que le clic soit ultra clair)
+    const chooseBtn = slide.querySelector('.choose-btn');
+    if(chooseBtn){
+      chooseBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        setActive(slide, {scroll: true, user: true});
+      });
+    }
+  });
+
+  // Initialisation: sélection par défaut (Option A — page "nickel chrome")
+  const initial = (slides && slides.length) ? slides[0] : null;
+  if(initial){
+    // Remplit le focus et conserve les images (comme un vrai clic utilisateur)
+    try { setActive(initial, {scroll:false, user:true}); } catch(e) {}
+
+    // Aligne visuellement le carrousel sur la carte active (évite une card "coupée" au chargement)
+    const car = document.querySelector('.carousel');
+    if(car){
+      try{ initial.scrollIntoView({behavior:'auto', inline:'start', block:'nearest'}); }catch(e){}
+      car.scrollLeft = 0; // garde-fou : départ propre
+    }
+  }
+})();
+</script>
+<esikia-footer></esikia-footer>
+<script>
+(() => {
+  if (customElements.get('esikia-footer')) return;
+
+  const STYLE = `
+    .esikiaFooter{
+      --esikia-ink:#0f172a;
+      --esikia-muted:#4b5563;
+      --esikia-muted2:#667085;
+      --esikia-border:rgba(16,24,40,.06);
+      --esikia-border-strong:rgba(16,24,40,.12);
+      --esikia-border-soft:rgba(16,24,40,.08);
+      --esikia-white:#ffffff;
+      --esikia-surface:#ffffff;
+      --esikia-line:#e5e7eb;
+      --esikia-line2:#e2e8f0;
+      --esikia-accent:#14b8a6;
+      --esikia-shadow:0 2px 8px rgba(15,23,42,.06);
+      --esikia-shadow-lg:0 2px 12px rgba(15,23,42,.06);
+      display:block;
+      width:100%;
+      margin-top:40px;
+      background:linear-gradient(180deg,#bdebea 0%,#e3f8f7 100%);
+      color:var(--esikia-ink);
+      border-top:1px solid var(--esikia-border);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    .esikiaFooter, .esikiaFooter *{ box-sizing:border-box; }
+    .esikiaFooter a{ color:inherit; }
+    .esikiaFooter button, .esikiaFooter input{ font:inherit; }
+    .esikiaFooter__wrap{
+      max-width:1400px;
+      margin:0 auto;
+      padding:80px 20px 70px;
+      padding-left:14px;
+      padding-right:20px;
+    }
+    .esikiaFooter__grid{
+      display:grid;
+      grid-template-columns: 1.20fr 1.25fr 0.95fr 1.55fr;
+      gap:28px 56px;
+      align-items:start;
+      min-width:0;
+    }
+    .esikiaFooter h4{
+      margin:2px 0 8px 0;
+      font-weight:800;
+      font-size:18px;
+      line-height:1.2;
+      letter-spacing:0;
+    }
+    .esikiaFooter p{
+      margin:0 0 10px 0;
+      color:var(--esikia-muted);
+    }
+    .esikiaFooter__socials{
+      display:flex;
+      gap:10px;
+      margin-top:6px;
+      flex-wrap:nowrap;
+    }
+    .esikiaFooter__socials a{
+      display:inline-flex;
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      align-items:center;
+      justify-content:center;
+      background:var(--esikia-surface);
+      border:1px solid var(--esikia-line);
+      box-shadow:var(--esikia-shadow);
+      transition:transform .06s ease;
+      text-decoration:none;
+    }
+    .esikiaFooter__socials a:hover{ transform:translateY(-1px); }
+    .esikiaFooter__socials svg{ width:20px; height:20px; display:block; }
+    .esikiaFooter__newsletter{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:nowrap;
+    }
+    .esikiaFooter__newsletter input{
+      height:42px;
+      padding:0 12px;
+      border:1px solid var(--esikia-line);
+      border-radius:12px;
+      width:280px;
+      font-size:14px;
+      background:#fff;
+      color:var(--esikia-ink);
+      outline:none;
+    }
+    .esikiaFooter__newsletter input::placeholder{ color:#98a2b3; }
+    .esikiaFooter__newsletter button{
+      height:42px;
+      padding:0 16px;
+      border:0;
+      border-radius:12px;
+      background:var(--esikia-accent);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .esikiaFooter__links{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6px 26px;
+    }
+    .esikiaFooter__links a{
+      text-decoration:none;
+      color:var(--esikia-ink);
+      margin:0;
+      white-space:nowrap;
+    }
+    .esikiaFooter__links a:hover{ text-decoration:underline; }
+    .esikiaFooter__bottom{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:28px;
+      border-top:1px solid var(--esikia-border-strong);
+      padding-top:22px;
+      color:var(--esikia-muted2);
+      font-size:13px;
+      gap:12px;
+    }
+    .esikiaFooter__langSwitch.lang-mini{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-left:0;
+    }
+    .esikiaFooter__langSwitch .sep{
+      opacity:.35;
+      font-weight:800;
+      line-height:1;
+    }
+    .esikiaFooter__langSwitch .lang-btn{
+      -webkit-appearance:none;
+      appearance:none;
+      border:1px solid rgba(230,241,235,.95);
+      background:#fff;
+      color:#16352f;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .12s ease;
+      box-shadow:0 10px 22px rgba(12, 68, 52, 0.06);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
+      line-height:1;
+      min-width:0;
+    }
+    .esikiaFooter__langSwitch .lang-btn:hover{
+      border-color: rgba(20,184,166,.55);
+      box-shadow:0 6px 18px rgba(20,184,166,.16);
+      transform: translateY(-1px);
+    }
+    .esikiaFooter__langSwitch .lang-btn:active{
+      transform: translateY(0px);
+      box-shadow:0 10px 22px rgba(12, 68, 52, 0.06);
+    }
+    .esikiaFooter__langSwitch .lang-btn:focus-visible{
+      outline: 3px solid rgba(40, 163, 123, 0.18);
+      outline-offset: 2px;
+    }
+    .esikiaFooter__langSwitch .lang-btn.is-active{
+      color: var(--esikia-green);
+    }
+    @media (max-width:1024px) and (min-width:721px){
+      .esikiaFooter{ padding-left:32px; padding-right:32px; }
+      .esikiaFooter__wrap{ max-width:700px; margin:0 auto; padding-left:0; padding-right:0; }
+      .esikiaFooter__grid{ grid-template-columns:1fr 1fr; gap:26px 44px; align-items:start; }
+      .esikiaFooter__col--brand{ grid-column:1 / -1; }
+      .esikiaFooter__col--brand p{ max-width:560px; }
+      .esikiaFooter__col--newsletter .esikiaFooter__newsletter{ flex-direction:row; align-items:center; flex-wrap:nowrap; gap:10px; }
+      .esikiaFooter__col--newsletter .esikiaFooter__newsletter input{ width:auto; flex:1 1 auto; min-width:0; max-width:none; }
+      .esikiaFooter__col--newsletter .esikiaFooter__newsletter button{ width:auto; flex:0 0 auto; white-space:nowrap; }
+      .esikiaFooter__col--useful .esikiaFooter__links{ grid-template-columns:1fr; gap:8px; }
+      .esikiaFooter__col--useful .esikiaFooter__links a{ white-space:normal; }
+      .esikiaFooter__col--legal{ grid-column:1 / -1; padding-top:6px; border-top:1px solid var(--esikia-border-soft); }
+      .esikiaFooter__col--legal .esikiaFooter__links{ grid-template-columns:1fr 1fr; gap:8px 26px; }
+      .esikiaFooter__col--legal .esikiaFooter__links a{ white-space:normal; }
+      .esikiaFooter__bottom{ margin-top:22px; padding-top:18px; }
+    }
+    @media (max-width:720px){
+      .esikiaFooter{ padding-left:18px; padding-right:18px; }
+      .esikiaFooter__wrap{ max-width:520px; margin:0 auto; padding:54px 0 46px; }
+      .esikiaFooter__grid{ grid-template-columns:1fr; gap:22px; }
+      .esikiaFooter h4{ font-size:16px; margin:0 0 8px 0; }
+      .esikiaFooter p{ font-size:14px; line-height:1.55; }
+      .esikiaFooter__socials{ justify-content:flex-start; flex-wrap:wrap; gap:10px; margin-top:10px; }
+      .esikiaFooter__socials a{ width:44px; height:44px; border-radius:14px; }
+      .esikiaFooter__newsletter{ flex-direction:column; align-items:stretch; gap:10px; }
+      .esikiaFooter__newsletter input, .esikiaFooter__newsletter button{ width:100%; height:44px; }
+      .esikiaFooter__links{ grid-template-columns:1fr; gap:10px; }
+      .esikiaFooter__links a{ white-space:normal; }
+      .esikiaFooter__bottom{ max-width:520px; margin:18px auto 0; padding-top:16px; flex-direction:column; align-items:flex-start; gap:12px; }
+    }
+  `;
+
+  const DICT = {
+    fr: {
+      brandTitle: 'Esikia',
+      brandDesc: 'La plateforme chrétienne dédiée aux retraites spirituelles, événements et initiatives.',
+      socialLabel: 'Réseaux sociaux',
+      newsletterTitle: 'Inscrivez-vous à notre newsletter',
+      newsletterPlaceholder: 'Votre e-mail',
+      newsletterButton: 'S’inscrire',
+      newsletterNote: '1 e-mail / mois, pas de spam. Désinscription en 1 clic.',
+      usefulTitle: 'Liens utiles',
+      linkAbout: 'À propos',
+      linkFaq: 'FAQ',
+      linkCharter: 'Charte éthique',
+      linkContact: 'Contact',
+      linkPartner: 'Devenir partenaire',
+      legalTitle: 'Informations légales',
+      legalNotice: 'Mentions légales',
+      privacy: 'Politique de confidentialité',
+      cookies: 'Gestion des cookies',
+      terms: 'Conditions d’utilisation',
+      sales: 'Conditions de vente',
+      refund: 'Annulation & remboursement',
+      footerLegal: '© 2026 Esikia — Tous droits réservés.',
+      langLabel: 'Langue'
+    },
+    en: {
+      brandTitle: 'Esikia',
+      brandDesc: 'The Christian platform dedicated to spiritual retreats, events and initiatives.',
+      socialLabel: 'Social media',
+      newsletterTitle: 'Subscribe to our newsletter',
+      newsletterPlaceholder: 'Your email',
+      newsletterButton: 'Subscribe',
+      newsletterNote: '1 email / month, no spam. Unsubscribe in 1 click.',
+      usefulTitle: 'Useful links',
+      linkAbout: 'About',
+      linkFaq: 'FAQ',
+      linkCharter: 'Ethical charter',
+      linkContact: 'Contact',
+      linkPartner: 'Become a partner',
+      legalTitle: 'Legal information',
+      legalNotice: 'Legal notice',
+      privacy: 'Privacy policy',
+      cookies: 'Cookie settings',
+      terms: 'Terms of use',
+      sales: 'Terms of sale',
+      refund: 'Cancellation & refund',
+      footerLegal: '© 2026 Esikia — All rights reserved.',
+      langLabel: 'Language'
+    }
+  };
+
+  const MARKUP = `
+    <div class="esikiaFooter__wrap">
+      <div class="esikiaFooter__grid">
+        <div class="esikiaFooter__col esikiaFooter__col--brand">
+          <h4 data-k="brandTitle">Esikia</h4>
+          <p data-k="brandDesc">La plateforme chrétienne dédiée aux retraites spirituelles, événements et initiatives.</p>
+          <div class="esikiaFooter__socials" data-k-attr="aria-label:socialLabel" aria-label="Réseaux sociaux">
+            <a aria-label="Facebook" href="https://www.facebook.com" rel="noopener" target="_blank"><svg aria-hidden="true" role="img" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.093 10.125 24v-8.437H7.078V12.07h3.047V9.412c0-3.007 1.792-4.667 4.533-4.667 1.313 0 2.686.235 2.686.235v2.953h-1.514c-1.492 0-1.957.927-1.957 1.878v2.259h3.328l-.532 3.492h-2.796V24C19.612 23.093 24 18.1 24 12.073z" fill="#1877F2"></path></svg></a>
+            <a aria-label="Instagram" href="https://www.instagram.com" rel="noopener" target="_blank"><svg aria-hidden="true" role="img" viewBox="0 0 24 24"><defs><linearGradient id="igGrad_esikiaFooter" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#F58529"></stop><stop offset="30%" stop-color="#FEDA77"></stop><stop offset="60%" stop-color="#DD2A7B"></stop><stop offset="100%" stop-color="#8134AF"></stop></linearGradient></defs><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 4.5A5.5 5.5 0 1 0 17.5 12 5.506 5.506 0 0 0 12 6.5zm0 2A3.5 3.5 0 1 1 8.5 12 3.504 3.504 0 0 1 12 8.5zM18 6.35a1.15 1.15 0 1 0 1.15 1.15A1.15 1.15 0 0 0 18 6.35z" fill="url(#igGrad_esikiaFooter)"></path></svg></a>
+            <a aria-label="LinkedIn" href="https://www.linkedin.com" rel="noopener" target="_blank"><svg aria-hidden="true" role="img" viewBox="0 0 24 24"><path d="M20.451 20.452h-3.554v-5.569c0-1.328-.027-3.036-1.85-3.036-1.851 0-2.135 1.445-2.135 2.94v5.665H9.357V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.603 0 4.269 2.373 4.269 5.459v6.282zM5.337 7.433A2.062 2.062 0 1 1 5.34 3.31a2.062 2.062 0 0 1-.003 4.123zM6.99 20.452H3.68V9H6.99v11.452z" fill="#0A66C2"></path></svg></a>
+            <a aria-label="YouTube" href="https://www.youtube.com" rel="noopener" target="_blank"><svg aria-hidden="true" role="img" viewBox="0 0 24 24"><path d="M23.498 6.186a2.999 2.999 0 0 0-2.112-2.12C19.583 3.5 12 3.5 12 3.5s-7.583 0-9.386.566A2.999 2.999 0 0 0 .502 6.186 31.49 31.49 0 0 0 0 12a31.49 31.49 0 0 0 .502 5.814 3 3 0 0 0 2.112 2.12C4.417 20.5 12 20.5 12 20.5s7.583 0 9.386-.566a3 3 0 0 0 2.112-2.12A31.49 31.49 0 0 0 24 12a31.49 31.49 0 0 0-.502-5.814zM9.75 15.5v-7l6 3.5-6 3.5z" fill="#FF0000"></path></svg></a>
+            <a aria-label="X" href="https://x.com" rel="noopener" target="_blank"><svg aria-hidden="true" role="img" viewBox="0 0 24 24"><path d="M18.244 2H21l-6.59 7.523L22 22h-5.828l-4.557-5.957L6.22 22H3.463l7.046-8.043L2 2h5.93l4.122 5.55L18.244 2zm-1.02 18h1.606L7.87 4h-1.7l10.055 16z" fill="#000"></path></svg></a>
+          </div>
+        </div>
+        <div class="esikiaFooter__col esikiaFooter__col--newsletter">
+          <h4 data-k="newsletterTitle">Inscrivez-vous à notre newsletter</h4>
+          <div class="esikiaFooter__newsletter">
+            <input id="newsletterEmail" type="email" data-k-attr="placeholder:newsletterPlaceholder" placeholder="Votre e-mail" />
+            <button id="newsletterBtn" type="button" data-k="newsletterButton">S’inscrire</button>
+          </div>
+          <p style="margin:6px 0 0 0;color:#667085" data-k="newsletterNote">1 e-mail / mois, pas de spam. Désinscription en 1 clic.</p>
+        </div>
+        <div class="esikiaFooter__col esikiaFooter__col--useful">
+          <h4 data-k="usefulTitle">Liens utiles</h4>
+          <div class="esikiaFooter__links">
+            <a href="/a-propos" data-k="linkAbout">À propos</a>
+            <a href="/faq" data-k="linkFaq">FAQ</a>
+            <a href="/charte-ethique" data-k="linkCharter">Charte éthique</a>
+            <a href="/contact" data-k="linkContact">Contact</a>
+            <a href="/partenaires/inscription" data-k="linkPartner">Devenir partenaire</a>
+          </div>
+        </div>
+        <div class="esikiaFooter__col esikiaFooter__col--legal">
+          <h4 data-k="legalTitle">Informations légales</h4>
+          <div class="esikiaFooter__links">
+            <a href="mentions-legales.html" data-k="legalNotice">Mentions légales</a>
+            <a href="politique-confidentialite.html" data-k="privacy">Politique de confidentialité</a>
+            <a href="gestion-cookies.html" data-k="cookies">Gestion des cookies</a>
+            <a href="conditions-utilisation.html" data-k="terms">Conditions d’utilisation</a>
+            <a href="conditions-vente.html" data-k="sales">Conditions de vente</a>
+            <a href="annulation-remboursement.html" data-k="refund">Annulation & remboursement</a>
+          </div>
+        </div>
+      </div>
+      <div class="esikiaFooter__bottom">
+        <div data-k="footerLegal">© 2026 Esikia — Tous droits réservés.</div>
+        <div class="esikiaFooter__langSwitch lang-mini" data-k-attr="aria-label:langLabel" aria-label="Langue">
+          <button class="lang-btn is-active esikia-btn" type="button" data-lang="fr" aria-pressed="true">FR</button>
+          <span class="sep">|</span>
+          <button class="lang-btn esikia-btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>`;
+
+  class EsikiaFooter extends HTMLElement {
+    constructor() {
+      super();
+      const root = this.attachShadow({ mode: 'open' });
+      const host = document.createElement('div');
+      host.innerHTML = `<style>${STYLE}</style><footer class="esikiaFooter" aria-label="Pied de page Esikia">${MARKUP}</footer>`;
+      root.appendChild(host);
+      this.root = root;
+    }
+
+    connectedCallback(){
+      const root = this.root;
+      if(!root) return;
+      root.querySelectorAll('[data-lang]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang') || 'fr';
+          if(window.EsikiaI18n && typeof window.EsikiaI18n.setLang === 'function'){
+            window.EsikiaI18n.setLang(lang);
+          }else{
+            this.applyLang(lang);
+          }
+        });
+      });
+      this.applyLang(this.getCurrentLang());
+      document.addEventListener('esikia:langchange', this._onLangChange = (e) => {
+        this.applyLang((e && e.detail && e.detail.lang) || this.getCurrentLang());
+      });
+    }
+
+    disconnectedCallback(){
+      if(this._onLangChange){
+        document.removeEventListener('esikia:langchange', this._onLangChange);
+      }
+    }
+
+    getCurrentLang(){
+      try{ return localStorage.getItem('esikia_lang') === 'en' ? 'en' : 'fr'; }catch(e){ return 'fr'; }
+    }
+
+    applyLang(lang){
+      const safeLang = lang === 'en' ? 'en' : 'fr';
+      const dict = DICT[safeLang];
+      const root = this.root;
+      if(!root) return;
+      root.querySelectorAll('[data-k]').forEach((el) => {
+        const key = el.getAttribute('data-k');
+        if(dict[key]) el.textContent = dict[key];
+      });
+      root.querySelectorAll('[data-k-attr]').forEach((el) => {
+        const raw = el.getAttribute('data-k-attr') || '';
+        raw.split(',').forEach((pair) => {
+          const parts = pair.split(':');
+          const attr = (parts[0] || '').trim();
+          const key = (parts[1] || '').trim();
+          if(attr && key && dict[key]) el.setAttribute(attr, dict[key]);
+        });
+      });
+      root.querySelectorAll('[data-lang]').forEach((btn) => {
+        const active = btn.getAttribute('data-lang') === safeLang;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    }
+  }
+
+  customElements.define('esikia-footer', EsikiaFooter);
+})();
+</script>
+<!-- ===========================
+     STEP 2 — Modale "avant de confirmer"
+     Objectif : afficher les infos pratiques AU BON MOMENT (juste avant l'action irréversible)
+     =========================== -->
+<div aria-hidden="true" aria-labelledby="step2Title" aria-modal="true" id="step2ModalOverlay" role="dialog">
+<div id="step2Modal">
+<div class="step2-topbar">
+<div class="step2-brand">
+<span aria-hidden="true" class="step2-dot"></span>
+<span data-i18n="page.retraits.step2.brand">Esikia — Réservation</span>
+</div>
+<span class="focus-status" data-i18n="page.retraits.step2.chip">Étape 2 : avant de confirmer</span>
+</div>
+<div class="step2-body">
+<h2 class="step2-title" data-i18n="page.retraits.step2.title" id="step2Title">À savoir avant de confirmer</h2>
+<p class="step2-subtitle" data-i18n-html="page.retraits.step2.subtitle_html">
+        Nous vous partageons les informations pratiques essentielles, juste avant de confirmer votre réservation.<br/>
+<b>En cas de besoin particulier, Esikia reste votre point de contact.</b>
+</p>
+<div aria-label="Rappel" class="step2-chips" data-i18n-attr='{"aria-label": "page.retraits.step2.aria_reminder"}'>
+<!-- Même style que les capsules de la page (cohérence visuelle) -->
+<span class="pill ok">3 jours</span>
+<span class="pill ok">12/10 → 14/10</span>
+<span class="pill ok">Hébergement sur place</span>
+</div>
+<div class="step2-box">
+<h4 data-i18n="page.retraits.step2.box_title">Informations pratiques</h4>
+<ul>
+<li data-i18n-html="page.retraits.step2.li_meals_html"><b>Repas</b> : pris en commun, dans la simplicité.</li>
+<li data-i18n-html="page.retraits.step2.li_rhythm_html"><b>Rythme</b> : silence et prière, avec des temps libres quotidiens.</li>
+<li data-i18n-html="page.retraits.step2.li_accessibility_html"><b>Accessibilité</b> : chambres PMR disponibles selon la configuration du lieu.</li>
+<li data-i18n-html="page.retraits.step2.li_email_info_html"><b>Informations envoyées par email</b> : adresse, horaires, accès et éléments pratiques pour préparer votre venue.</li>
+<li data-i18n-html="page.retraits.step2.li_booking_mode_html"><b>Mode de réservation</b> : affiché automatiquement selon le fonctionnement du lieu.</li>
+</ul>
+</div>
+<div class="step2-actions">
+<button class="step2-back" data-i18n="common.cta.back" id="step2BackBtn" type="button">← Retour</button>
+<button class="step2-primary" data-i18n="page.retraits.step2.cta_confirm_pay" id="step2ConfirmBtn" type="button">Confirmer et payer</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function(){
+  const shell = document.querySelector('#carrousel .carousel-shell');
+  const carousel = document.querySelector('#carrousel .carousel');
+  if(!shell || !carousel) return;
+
+  const prev = shell.querySelector('.carousel-prev');
+  const next = shell.querySelector('.carousel-next');
+  if(!prev || !next) return;
+
+  function getStep(){
+    const firstSlide = carousel.querySelector('.slide');
+    if(!firstSlide) return 340;
+    const slideW = firstSlide.getBoundingClientRect().width || 340;
+    const cs = window.getComputedStyle(carousel);
+    const gap = parseFloat(cs.columnGap || cs.gap || '14') || 14;
+    return slideW + gap;
+  }
+
+  function update(){
+    const maxLeft = carousel.scrollWidth - carousel.clientWidth;
+    const left = carousel.scrollLeft;
+    prev.disabled = left <= 2;
+    next.disabled = left >= (maxLeft - 2);
+  }
+
+  function scrollByDir(dir){
+    const step = getStep();
+    carousel.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', ()=>scrollByDir(-1));
+  next.addEventListener('click', ()=>scrollByDir(1));
+
+  carousel.addEventListener('scroll', ()=>{ window.requestAnimationFrame(update); }, { passive:true });
+  window.addEventListener('resize', ()=>{ window.requestAnimationFrame(update); });
+
+  // Init
+  update();
+})();
+</script>
+<script id="step2-modal-js">
+(function(){
+  const overlay = document.getElementById('step2ModalOverlay');
+  const modal   = document.getElementById('step2Modal');
+  const openBtn = document.getElementById('focusReserve');
+  const backBtn = document.getElementById('step2BackBtn');
+  const confirmBtn = document.getElementById('step2ConfirmBtn');
+
+  if(!overlay || !modal) return;
+
+  function openStep2(e){
+    if(e) e.preventDefault();
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(()=>{ (confirmBtn || modal)?.focus?.(); }, 0);
+  }
+
+  function closeStep2(){
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(openBtn) openBtn.focus();
+  }
+
+  if(openBtn) openBtn.addEventListener('click', openStep2);
+  if(backBtn) backBtn.addEventListener('click', function(e){ e.preventDefault(); closeStep2(); });
+
+  // Click outside modal closes
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeStep2();
+  });
+
+  // Esc closes
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeStep2();
+  });
+
+  // Confirm CTA: go to payment
+  if(confirmBtn) confirmBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.href = 'paiement.html';
+  });
+})();
+</script>
+<script id="esikia-i18n">
+(function(){
+    var DICT = {"fr":{"common.brand.esikia":"Esikia","common.nav.back_to_place":"Retour au lieu","common.nav.platform_home":"Accueil plateforme","common.nav.account":"Espace personnel","page.retraits.carousel.title":"Vos retraites à venir","page.retraits.carousel.subtitle_html":"Chaque retraite est organisée par ce lieu d’accueil.<br>Découvrez les retraites actuellement ouvertes à l’inscription et choisissez celle qui correspond à votre cheminement.","common.badge.selection":"Sélection","common.cta.select":"Sélectionner","page.retraits.carousel.aria_prev":"Voir les retraites précédentes","page.retraits.carousel.aria_next":"Voir les retraites suivantes","page.retraits.carousel.aria_carousel":"Carrousel de retraites","page.retraits.focus.kicker":"Séjour sélectionné","page.retraits.focus.kpi.theme":"Thème","page.retraits.focus.kpi.duration":"Durée","page.retraits.focus.kpi.dates":"Dates","page.retraits.focus.kpi.lodging":"Hébergement","page.retraits.focus.description_label":"Description","page.retraits.focus.pitch_title":"Votre retraite","page.retraits.cta_final.title":"Soutenir le lieu par un temps de retraite","page.retraits.focus.cta_view_retraits":"Voir les retraites","page.retraits.trust.booking_title":"Réservation sereine","page.retraits.trust.booking_desc":"Paiement sécurisé et confirmation claire.","page.retraits.trust.charter_title":"Charte éthique","page.retraits.trust.charter_desc":"Une charte simple, assumée, et un cadre transparent.","page.retraits.trust.human_title":"Accompagnement humain","page.retraits.trust.human_desc":"Un contact possible si besoin, sans démarche imposée.","common.footer.aria_footer":"Pied de page","common.footer.aria_links":"Liens utiles","common.footer.mentions":"Mentions légales","common.footer.charter":"Charte éthique","common.footer.faq":"FAQ","common.footer.contact":"Contact","common.footer.legal":"© 2025 Esikia — Tous droits réservés","common.lang.aria_label":"Langue","page.retraits.step2.brand":"Esikia — Réservation","page.retraits.step2.chip":"Étape 2 : avant de confirmer","page.retraits.step2.title":"À savoir avant de confirmer","page.retraits.step2.subtitle_html":"Nous vous partageons les informations pratiques essentielles, juste avant de confirmer votre réservation.<br><b>En cas de besoin particulier, Esikia reste votre point de contact.</b>","page.retraits.step2.aria_reminder":"Rappel","page.retraits.step2.box_title":"Informations pratiques","page.retraits.step2.li_meals_html":"<b>Repas</b> : pris en commun, dans la simplicité.","page.retraits.step2.li_rhythm_html":"<b>Rythme</b> : silence et prière, avec des temps libres quotidiens.","page.retraits.step2.li_accessibility_html":"<b>Accessibilité</b> : chambres PMR disponibles selon la configuration du lieu.","page.retraits.step2.li_email_info_html":"<b>Informations envoyées par email</b> : adresse, horaires, accès et éléments pratiques pour préparer votre venue.","page.retraits.step2.li_booking_mode_html":"<b>Mode de réservation</b> : affiché automatiquement selon le fonctionnement du lieu.","common.cta.back":"← Retour","page.retraits.step2.cta_confirm_pay":"Confirmer et payer","page.retraits.focus.aria_frame":"Cadre de la retraite","page.retraits.focus.aria_visual":"Visuel de la retraite","page.retraits.focus.current_selection":"Sélection actuelle :","page.retraits.focus.expectations.title":"Ce qui vous attend pendant la retraite","page.retraits.focus.expectations.item_1":"Accueil simple et discret à votre arrivée","page.retraits.focus.expectations.item_2":"Hébergement sur place, dans un cadre calme","page.retraits.focus.expectations.item_3":"Temps de prière proposés chaque jour, sans obligation","page.retraits.focus.expectations.item_4":"Repas pris en commun, dans la simplicité","page.retraits.focus.expectations.item_5":"Temps libres quotidiens (repos, marche, lecture)","page.retraits.focus.expectations.item_6":"Possibilité d’échanger si besoin, sans démarche imposée","page.retraits.focus.cta_reserve":"Je réserve ma place","page.retraits.trust_flow.title":"Déroulé & cadre de confiance","page.retraits.trust_flow.subtitle":"Un chemin simple, encadré et respectueux, du choix jusqu’à l’accueil.","page.retraits.trust_flow.how_title":"Comment se déroule une réservation","page.retraits.trust_flow.step1.title":"Vous choisissez","page.retraits.trust_flow.step1.desc":"Une retraite qui correspond à votre cheminement.","page.retraits.trust_flow.step2.title":"Vous réservez sereinement","page.retraits.trust_flow.step2.desc":"Réservation simple et paiement sécurisé sur la plateforme.","page.retraits.trust_flow.step3.title":"Le lieu vous accueille","page.retraits.trust_flow.step3.desc":"Vous êtes attendu et accompagné selon le cadre proposé.","page.retraits.trust_flow.framework_title":"Un cadre clair et respectueux","page.retraits.trust_flow.card1.title":"Paiement sécurisé","page.retraits.trust_flow.card1.desc":"Réservation fiable et confirmée.","page.retraits.trust_flow.card2.title":"Des lieux engagés, certifiés Esikia","page.retraits.trust_flow.card2.desc":"Une charte simple, assumée, et un cadre transparent.","page.retraits.trust_flow.card3.title":"Accompagnement humain","page.retraits.trust_flow.card3.desc":"Un contact possible si besoin, sans démarche imposée."},"en":{"common.brand.esikia":"Esikia","common.nav.back_to_place":"Back to venue","common.nav.platform_home":"Platform home","common.nav.account":"My account","page.retraits.carousel.title":"Your upcoming retreats","page.retraits.carousel.subtitle_html":"Each retreat is organized by this venue.<br>Explore the retreats currently open for registration and choose the one that fits your journey.","common.badge.selection":"Selected","common.cta.select":"Select","page.retraits.carousel.aria_prev":"View previous retreats","page.retraits.carousel.aria_next":"View next retreats","page.retraits.carousel.aria_carousel":"Retreat carousel","page.retraits.focus.kicker":"Selected retreat","page.retraits.focus.kpi.theme":"Theme","page.retraits.focus.kpi.duration":"Duration","page.retraits.focus.kpi.dates":"Dates","page.retraits.focus.kpi.lodging":"Lodging","page.retraits.focus.description_label":"Description","page.retraits.focus.pitch_title":"Your retreat","page.retraits.cta_final.title":"Support the venue through a retreat","page.retraits.focus.cta_view_retraits":"View retreats","page.retraits.trust.booking_title":"Book with confidence","page.retraits.trust.booking_desc":"Secure payment and clear confirmation.","page.retraits.trust.charter_title":"Ethical charter","page.retraits.trust.charter_desc":"A simple, clear charter and a transparent framework.","page.retraits.trust.human_title":"Human support","page.retraits.trust.human_desc":"A point of contact if needed, without pushing extra steps.","common.footer.aria_footer":"Footer","common.footer.aria_links":"Useful links","common.footer.mentions":"Legal notice","common.footer.charter":"Ethical charter","common.footer.faq":"FAQ","common.footer.contact":"Contact","common.footer.legal":"© 2025 Esikia — All rights reserved","common.lang.aria_label":"Language","page.retraits.step2.brand":"Esikia — Booking","page.retraits.step2.chip":"Step 2: before confirming","page.retraits.step2.title":"Before you confirm","page.retraits.step2.subtitle_html":"Here are the essential practical details, right before you confirm your booking.<br><b>If you have a specific need, Esikia remains your point of contact.</b>","page.retraits.step2.aria_reminder":"Reminder","page.retraits.step2.box_title":"Practical information","page.retraits.step2.li_meals_html":"<b>Meals</b>: shared together, simply.","page.retraits.step2.li_rhythm_html":"<b>Rhythm</b>: silence and prayer, with daily free time.","page.retraits.step2.li_accessibility_html":"<b>Accessibility</b>: accessible rooms may be available depending on the venue setup.","page.retraits.step2.li_email_info_html":"<b>Details sent by email</b>: address, schedule, access, and practical tips to prepare your stay.","page.retraits.step2.li_booking_mode_html":"<b>Booking mode</b>: shown automatically depending on how the venue operates.","common.cta.back":"← Back","page.retraits.step2.cta_confirm_pay":"Confirm and pay","page.retraits.focus.aria_frame":"Retreat frame","page.retraits.focus.aria_visual":"Retreat visual","page.retraits.focus.current_selection":"Current selection:","page.retraits.focus.expectations.title":"What to expect during the retreat","page.retraits.focus.expectations.item_1":"A simple, discreet welcome on arrival","page.retraits.focus.expectations.item_2":"On-site accommodation in a peaceful setting","page.retraits.focus.expectations.item_3":"Daily prayer times offered, with no obligation","page.retraits.focus.expectations.item_4":"Shared meals in simplicity","page.retraits.focus.expectations.item_5":"Daily free time (rest, walks, reading)","page.retraits.focus.expectations.item_6":"Possibility to talk if needed, with no forced steps","page.retraits.focus.cta_reserve":"Reserve my spot","page.retraits.trust_flow.title":"How it works & trust framework","page.retraits.trust_flow.subtitle":"A simple, guided and respectful path — from choosing to being welcomed.","page.retraits.trust_flow.how_title":"How does a booking work?","page.retraits.trust_flow.step1.title":"You choose","page.retraits.trust_flow.step1.desc":"A retreat that matches your journey.","page.retraits.trust_flow.step2.title":"You book with peace of mind","page.retraits.trust_flow.step2.desc":"Simple booking and secure payment on the platform.","page.retraits.trust_flow.step3.title":"The venue welcomes you","page.retraits.trust_flow.step3.desc":"You are expected and supported according to the proposed framework.","page.retraits.trust_flow.framework_title":"A clear and respectful framework","page.retraits.trust_flow.card1.title":"Secure payment","page.retraits.trust_flow.card1.desc":"A reliable, confirmed booking.","page.retraits.trust_flow.card2.title":"Committed venues, verified by Esikia","page.retraits.trust_flow.card2.desc":"A simple, clear charter and a transparent framework.","page.retraits.trust_flow.card3.title":"Human support","page.retraits.trust_flow.card3.desc":"A contact is available if needed, with no forced steps."}};
+  function getSaved(){
+    try{ return localStorage.getItem('esikia_lang'); }catch(e){ return null; }
+  }
+  function save(lang){ try{ localStorage.setItem('esikia_lang', lang); }catch(e){} }
+  function t(lang, key){
+    return (DICT[lang] && DICT[lang][key]) || (DICT.fr && DICT.fr[key]) || '';
+  }
+  function applyAttrs(lang, el){
+    var raw = el.getAttribute('data-i18n-attr');
+    if(!raw) return;
+    try{
+      var map = JSON.parse(raw);
+      Object.keys(map).forEach(function(attr){
+        var k = map[attr];
+        var v = t(lang, k);
+        if(v !== '') el.setAttribute(attr, v);
+      });
+    }catch(e){}
+  }
+  function apply(lang){
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var v = t(lang, key);
+      if(v !== '') el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      var v = t(lang, key);
+      if(v !== '') el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(function(el){ applyAttrs(lang, el); });
+
+    // sync active buttons (header + footer)
+    document.querySelectorAll('.lang-mini').forEach(function(box){
+      var btns = box.querySelectorAll('.lang-btn');
+      btns.forEach(function(b){
+        var isActive = (b.getAttribute('data-lang') === lang);
+        b.classList.toggle('is-active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    });
+    save(lang);
+  }
+
+  function norm(lang){
+    return (lang === 'en') ? 'en' : 'fr';
+  }
+
+  function setLang(lang){
+    var normalized = norm(lang);
+    apply(normalized);
+    try{ document.dispatchEvent(new CustomEvent('esikia:langchange', { detail:{ lang: normalized } })); }catch(e){}
+  }
+
+  // Bind click (do not rely on existing handler)
+  document.querySelectorAll('.lang-mini .lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang') || 'fr'); });
+  });
+
+  // Init
+  setLang(getSaved() || 'fr');
+
+  window.EsikiaI18n = { setLang: setLang };
+})();
+</script>
+
+<nav class="esikia-demo-nav" aria-label="Navigation démo">
+  <a class="demo-btn" href="Esikia_Page_Hote_LIEUX.html">← Retour</a>
+  <a class="demo-btn" href="index.html">Index des démos</a>
+  <a class="demo-btn primary" href="fiche_infos_retraitant_journal_reservation.html">Suivant →</a>
+</nav>
+</body>
+</html>
